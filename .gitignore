@@ -1,4 +1,7 @@
 .sass_cache/
 .sass_cache/*
+public/stylesheets/.sass-cache/
+public/stylesheets/.sass-cache/*
+
 Gemfile.lock
 public/stylesheets/voview.css

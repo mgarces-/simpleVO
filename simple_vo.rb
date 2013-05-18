@@ -1,11 +1,12 @@
 class SimpleVO < Sinatra::Base
   get '/' do
-    haml :vo
+    slim :vo
   end
   
   post '/search' do
-    @hello = 'world'
-    haml :vo
+    # query over Several VO's (TAP)
+    
+    slim :vo
   end
     
 end

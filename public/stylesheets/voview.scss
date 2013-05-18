@@ -2,7 +2,7 @@
 body {
 	font-size: 100%;
 	color: #000;
-	background-color: #fff;
+	background-color: #ecf0f1;
 	margin-top: 10px;
 	padding: 0;
 }
@@ -246,13 +246,13 @@ tr.odd {
 
 th{
 	.ascending {
-		background-image: url(img/asc.png);
+		background-image: url(../images/asc.png);
 		background-position: 100% 50%;
 		background-repeat: no-repeat;
 	}
 
 	.descending {
-		background-image: url(img/desc.png);
+		background-image: url(../images/desc.png);
 		background-position: 100% 50%;
 		background-repeat: no-repeat;
 	}
@@ -263,7 +263,6 @@ th{
 div.buttons {
 	clear: both;
 	width: 100%;
-	height: 1.8em;
 	border-bottom: 1px solid #ccc;
 	border-top: 1px solid #ccc;
 	margin: 0.5em 0 0.5em 0;
@@ -279,15 +278,13 @@ div.buttons {
 			height: 0;
 		}
 		.pageLengthControl {}
-			
-			.pagebuttons {
-				float: right;
-				padding: 0.3em 0 0 0;
-				margin: 0 0;
-				height: 0;
-			}
+		.pagebuttons {
+			float: right;
+			padding: 0.3em 0 0 0;
+			margin: 0 0;
+			height: 0;
 		}
-
+		
 		a {
 			text-decoration: none;
 			
@@ -313,44 +310,45 @@ div.buttons {
 				cursor: default;
 			}		
 		}	
+	}	
+}
+
+
+
+.rev, .rrev {
+	padding: 2px 2px 2px 26px;
+	background-position: 0% 50%;
+	background-repeat: no-repeat;
+	text-align: left;
+}
+
+.fwd, .ffwd {
+	padding: 2px 26px 2px 2px;
+	background-position: 100% 50%;
+	background-repeat: no-repeat;
+	text-align: right;
+}
 	
+.rrev { background-image: url(../images/afirst.gif); }
+.rev { background-image: url(../images/aprev.gif); }
+.fwd { background-image: url(../images/anext.gif); }
+.ffwd { background-image: url(../images/alast.gif); }
+
+.rrev:hover { background-image: url(../images/afirst_hl.gif); }
+.rev:hover { background-image: url(../images/aprev_hl.gif); }
+.fwd:hover { background-image: url(../images/anext_hl.gif); }
+.ffwd:hover { background-image: url(../images/alast_hl.gif); }
+
+.rrev.inactive { background-image: url(../images/afirst_in.gif); }
+.rev.inactive { background-image: url(../images/aprev_in.gif); }
+.fwd.inactive { background-image: url(../images/anext_in.gif); }
+.ffwd.inactive { background-image: url(../images/alast_in.gif); }
+
+@media print {
+	div.pagebuttons {
+		display: none;
 	}
-
-
-	.rev, .rrev {
-		padding: 2px 2px 2px 26px;
-		background-position: 0% 50%;
-		background-repeat: no-repeat;
-		text-align: left;
+	div.pageLengthControl {
+		display: none;
 	}
-
-	.fwd, .ffwd {
-		padding: 2px 26px 2px 2px;
-		background-position: 100% 50%;
-		background-repeat: no-repeat;
-		text-align: right;
-	}
-
-	.rrev { background-image: url(img/afirst.gif); }
-	.rev { background-image: url(img/aprev.gif); }
-	.fwd { background-image: url(img/anext.gif); }
-	.ffwd { background-image: url(img/alast.gif); }
-
-	.rrev:hover { background-image: url(img/afirst_hl.gif); }
-	.rev:hover { background-image: url(img/aprev_hl.gif); }
-	.fwd:hover { background-image: url(img/anext_hl.gif); }
-	.ffwd:hover { background-image: url(img/alast_hl.gif); }
-
-	.rrev.inactive { background-image: url(img/afirst_in.gif); }
-	.rev.inactive { background-image: url(img/aprev_in.gif); }
-	.fwd.inactive { background-image: url(img/anext_in.gif); }
-	.ffwd.inactive { background-image: url(img/alast_in.gif); }
-
-	@media print {
-		div.pagebuttons {
-			display: none;
-		}
-		div.pageLengthControl {
-			display: none;
-		}
-	}
+}

@@ -1,0 +1,30 @@
+doctype html 
+html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"
+	head
+		link rel="stylesheet" href="stylesheets/voview.css"
+		meta http-equiv="Content-Type" content="text/html; charset=utf-8"
+		title Sample of VOView using Sinatra :D
+	body
+		#header
+			h1 Dummy Virtual Observatory
+			
+		#content
+			form action="search" method="post"
+				fieldset
+					ol
+						li
+							label for="param1"
+							input type="text" name="param1" class="text"
+						input type="submit" value="Search" class="button" id="search_btn"
+
+			.voview_table
+			
+		#footer 
+		| Copyright by LIRAE-UTFSM
+
+script src="javascripts/jquery-1.9.1.min.js"
+script src="javascripts/dragtable.js"
+script src="javascripts/sarissa.js"
+script src="javascripts/tablednd.js"
+script src="javascripts/voview_pkg.js"
+script src="javascripts/main.js"
