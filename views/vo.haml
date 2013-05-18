@@ -8,15 +8,15 @@
 		#header
 			asdasd
 		#content
-			asdasd
+			.voviewTab 
 		#footer
 			asdasd
-		
-	:javascript
-		var Tab = 'asd';	
 		
 		
 %script{:src=>"javascripts/dragtable.js"}
 %script{:src=>"javascripts/sarissa.js"}
 %script{:src=>"javascripts/tablednd.js"}
 %script{:src=>"javascripts/voview_pkg.js"}	
+:javascript
+	(new voview({input: {url: "example_input.xml"}, widgetID: "voviewTab"})).start();
+		
