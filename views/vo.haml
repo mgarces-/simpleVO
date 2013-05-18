@@ -8,15 +8,14 @@
 		#header
 			asdasd
 		#content
-			.voviewTab 
+			.voview_table 
 		#footer
 			asdasd
 		
-		
+
+%script{:src=>"javascripts/jquery-1.9.1.min.js"}
 %script{:src=>"javascripts/dragtable.js"}
 %script{:src=>"javascripts/sarissa.js"}
 %script{:src=>"javascripts/tablednd.js"}
 %script{:src=>"javascripts/voview_pkg.js"}	
-:javascript
-	(new voview({input: {url: "example_input.xml"}, widgetID: "voviewTab"})).start();
-		
+%script{:src=>"javascripts/main.js"}		
