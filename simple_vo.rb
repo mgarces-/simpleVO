@@ -3,10 +3,9 @@ class SimpleVO < Sinatra::Base
     slim :vo
   end
   
-  post '/search' do
-    # query over Several VO's (TAP)
-    
-    slim :vo
-  end
+  # get '/search' do
+  #   content_type :json 
+  #   {:xmlpath=>'example_input.xml',:xml=>}.to_json
+  # end
     
 end

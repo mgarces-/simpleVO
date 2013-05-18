@@ -9,18 +9,19 @@ html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"
 			h1 Dummy Virtual Observatory
 			
 		#content
-			form action="search" method="post"
+			form action="search" method="post" id="search_form"
 				fieldset
 					ol
 						li
-							label for="param1"
+							label for="param1" Param1:
 							input type="text" name="param1" class="text"
-						input type="submit" value="Search" class="button" id="search_btn"
+						input type="submit" value="Search" class="button"
 
 			.voview_table
 			
 		#footer 
 		| Copyright by LIRAE-UTFSM
+
 
 script src="javascripts/jquery-1.9.1.min.js"
 script src="javascripts/dragtable.js"
