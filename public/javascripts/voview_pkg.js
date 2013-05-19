@@ -191,6 +191,7 @@ voview.prototype.makeGetXml = function(getXsltParams) {
                         alert("VOView: Response from '" + fileUrl + "' is not XML? " + responseData);
                     }
                 } else {
+									console.log('asdasdas')
                     var errorMessage = "VOView: Error getting xslt file " + fileUrl + ". Status: " + vov_xmlhttp.status;
                     if (httpStatus === 404 && fileUrl.match(/proxy.pl\?/)) {
                         errorMessage += "\n\nProxy may not be properly installed.";
@@ -204,6 +205,7 @@ voview.prototype.makeGetXml = function(getXsltParams) {
             vov_xmlhttp.open("GET", fileUrl, true);
             vov_xmlhttp.setRequestHeader('Accept', 'text/xml');
         } catch (e) {
+						console.log("something went wrong with get request")
             alert("VOView: Error opening '" + fileUrl + "':" + e.message);
         }
         this.send = function() {
