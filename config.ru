@@ -1,7 +1,8 @@
-Bundler.require(:default)
-
 require 'rubygems'
 require 'bundler'
+
+Bundler.require(:default, ENV['RACK_ENV'].to_s)
+
 require 'sass/plugin/rack'
 require './simple_vo'
 

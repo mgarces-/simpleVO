@@ -8,7 +8,7 @@ class SimpleVO < Sinatra::Base
   get '/search' do
     votable = RestClient.get params[:url]
     
-    content_type 'text/xml'
+    content_type 'type/votable+xml'
     votable
   end
     
