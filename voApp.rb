@@ -1,6 +1,9 @@
+require 'sinatra'
+require 'sinatra/flash'
+require 'sinatra/redirect_with_flash'
 require 'rest_client'
 
-class SimpleVO < Sinatra::Base
+class VOApp < Sinatra::Base
   get '/' do
     slim :vo
   end

@@ -22,6 +22,8 @@ doc/
 .sass_cache/*
 public/stylesheets/.sass-cache/
 public/stylesheets/.sass-cache/*
+.rspec
+.rspec/*
 
 Gemfile.lock
 public/stylesheets/voview.css

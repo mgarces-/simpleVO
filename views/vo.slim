@@ -1,31 +1,45 @@
 doctype html 
 html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"
 	head
-		link rel="stylesheet" href="stylesheets/voview.css"
 		meta http-equiv="Content-Type" content="text/html; charset=utf-8"
-		title Sample of VOView using Sinatra :D
+  	meta name="viewport" content="width=device-width, initial-scale=1.0"
+		
+    link rel="stylesheet" href="stylesheets/bootstrap.min.css" media="screen"
+		link rel="stylesheet" href="stylesheets/voview.css"
+		link rel="stylesheet" href="stylesheets/layout.css"
+		
+		title Virtual Observatory App.
+		
 	body
-		#header
-			h1 Dummy Virtual Observatory
-			
-		#content
-			form action="search" method="get" id="search_form"
-				fieldset
-					ol
-						li
-							label for="url" VOTable url:
-							input type="text" name="url" class="text" value="https://almascience.nrao.edu/aq/search?source_name_sesame=m87&radius=0:10:00&scan_intent-asu==*TARGET*&viewFormat=asdm&download=true"
-						input type="submit" value="Search" class="button"
-
-			.voview_table
-			
-		#footer 
-		| Copyright 
-
-
+	.navbar.navbar-inverse.navbar-fixed-top
+	  .navbar-inner
+	    .container
+	      button.btn.btn-navbar data-target=".nav-collapse" data-toggle="collapse" type="button"
+	      a.brand href="#" Virtual Observatory
+				
+	.container
+		.tabbable
+		  ul.nav.nav-tabs
+		    li.active
+		      a data-toggle="tab" href="#query_tab" Query Search
+		    li
+		      a data-toggle="tab" href="#adql_tab"ADQL Search
+		    li
+		      a data-toggle="tab" href="#fits_tab" FITS Search
+		  .tab-content
+		    #query_tab.tab-pane.active
+					== Slim::Template.new('views/_query_form.slim').render 
+		    #adql_tab.tab-pane
+		      == Slim::Template.new('views/_adql_form.slim').render 
+		    #fits_tab.tab-pane
+		      == Slim::Template.new('views/_fits_form.slim').render 
+	
+	
 	script src="javascripts/jquery-1.9.1.min.js"
+	script src="javascripts/bootstrap.min.js"
 	script src="javascripts/dragtable.js"
 	script src="javascripts/sarissa.js"
 	script src="javascripts/tablednd.js"
 	script src="javascripts/voview_pkg.js"
-	script src="javascripts/main.js"
+	script src="javascripts/main.js"	
+
