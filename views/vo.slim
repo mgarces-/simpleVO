@@ -11,28 +11,37 @@ html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"
 		title Virtual Observatory App.
 		
 	body
-	.navbar.navbar-inverse.navbar-fixed-top
-	  .navbar-inner
-	    .container
-	      button.btn.btn-navbar data-target=".nav-collapse" data-toggle="collapse" type="button"
-	      a.brand href="#" Virtual Observatory
-				
-	.container
-		.tabbable
-		  ul.nav.nav-tabs
-		    li.active
-		      a data-toggle="tab" href="#query_tab" Query Search
-		    li
-		      a data-toggle="tab" href="#adql_tab"ADQL Search
-		    li
-		      a data-toggle="tab" href="#fits_tab" FITS Search
-		  .tab-content
-		    #query_tab.tab-pane.active
-					== Slim::Template.new('views/_query_form.slim').render 
-		    #adql_tab.tab-pane
-		      == Slim::Template.new('views/_adql_form.slim').render 
-		    #fits_tab.tab-pane
-		      == Slim::Template.new('views/_fits_form.slim').render 
+		.navbar.navbar-inverse
+		  .navbar-inner
+		    .container
+		      button.btn.btn-navbar data-target=".nav-collapse" data-toggle="collapse" type="button"
+		      a.brand href="#" Virtual Observatory
+
+		#main-content
+			.tabbable
+			  ul.nav.nav-tabs
+			    li.active
+			      a data-toggle="tab" href="#query_tab" Query Search
+			    li
+			      a data-toggle="tab" href="#adql_tab"ADQL Search
+			    li
+			      a data-toggle="tab" href="#fits_tab" FITS Search
+			  .tab-content
+			    #query_tab.tab-pane.active
+						== Slim::Template.new('views/_query_form.slim').render 
+			    #adql_tab.tab-pane
+			      == Slim::Template.new('views/_adql_form.slim').render 
+			    #fits_tab.tab-pane
+			      == Slim::Template.new('views/_fits_form.slim').render 
+		.push
+			
+		footer
+			.navbar.navbar-inverse
+				.navbar-inner.navbar-fixed-bottom
+					.container
+						 .row 
+						 	center Created by Mario Garces & Walter Fariña.
+					
 	
 	
 	script src="javascripts/jquery-1.9.1.min.js"
