@@ -4,7 +4,7 @@ require 'bundler'
 Bundler.require(:default, ENV['RACK_ENV'].to_s)
 
 require 'sass/plugin/rack'
-require './voApp'
+require './vo_app'
 
 Sass::Plugin.options[:template_location] = 'public/stylesheets'
 Sass::Plugin.options[:style] = :compressed

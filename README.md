@@ -1,11 +1,14 @@
-voview_sample
-=============
+Simple VO Frontend Application
+==============================
 
-simple app to display votables.
+A prototype of a Virtual Observatory front-end application using IVOA standards. It's implemented over Sinatra and other cool technologies.
 
-### Install and Usage
-	$ bundle install
-	$ rackup
+Usage
+-----
+Just install dependencies and go on.
 
+    $ bundle install
+    $ rackup
 
+Now visit http://localhost:9292 in your browser.
 

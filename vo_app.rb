@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'slim'
 require 'sinatra/flash'
 require 'sinatra/redirect_with_flash'
 require 'rest_client'

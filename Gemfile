@@ -7,6 +7,7 @@ gem 'rack-coffee'
 gem 'sinatra-flash'
 gem 'sinatra-redirect-with-flash'
 gem 'rest-client'
+gem 'voruby'
 
 group :development do
   gem "rerun"
