@@ -1,38 +1,40 @@
-html, body {
-    height: 100%;
+html, body, .container, .content {
+	height: 100%;
 }
 
 body {
 	background-color: #1e406d;
 }
 
-
-.navbar-inner {
-	border-radius: 0px;
+.navbar {
+	margin-bottom: 0;
 }
-
-#main-content {
+ 
+.wrapper {
 	background-color: #fff;
-	min-height: 80%;
+	min-height: 100%;
 	height: auto !important;
 	height: 100%;
-	margin: 0 auto -4em;
+	width:90%;
+	margin: 0 auto -40px;
+	overflow: hidden;
+	
+	.content {
+		
+	}
+	.push {
+		margin-bottom: 40px;
+	}
 }
-
-.nav {
-	background-color: #eee;
-}
-
-
-.footer, .push {
-	height: 4em;
-}
-
-footer {
-	.container {
-		.row {
-			color: #999;
+ 
+footer{
+	.footer-wrapper {	
+		.container-fluid {
+			.row-fluid {
+				text-align: center;
+				color: #999;
+			}
 		}
 	}
-	
 }
+

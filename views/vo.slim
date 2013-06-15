@@ -1,53 +1,66 @@
-doctype html 
-html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"
+doctype html
+html
 	head
 		meta http-equiv="Content-Type" content="text/html; charset=utf-8"
-  	meta name="viewport" content="width=device-width, initial-scale=1.0"
+		meta name="viewport" content="width=device-width, initial-scale=1.0"
 		
-    link rel="stylesheet" href="stylesheets/bootstrap.min.css" media="screen"
+		link rel="stylesheet" href="stylesheets/bootstrap.min.css" media="screen"
 		link rel="stylesheet" href="stylesheets/voview.css"
 		link rel="stylesheet" href="stylesheets/layout.css"
 		
 		title Virtual Observatory App.
-		
-	body
-		.navbar.navbar-inverse
-		  .navbar-inner
-		    .container
-		      button.btn.btn-navbar data-target=".nav-collapse" data-toggle="collapse" type="button"
-		      a.brand href="#" Virtual Observatory
 
-		#main-content
-			.tabbable
-			  ul.nav.nav-tabs
-			    li.active
-			      a data-toggle="tab" href="#query_tab" Query Search
-			    li
-			      a data-toggle="tab" href="#adql_tab"ADQL Search
-			    li
-			      a data-toggle="tab" href="#fits_tab" FITS Search
-			  .tab-content
-			    #query_tab.tab-pane.active
-						== Slim::Template.new('views/_query_form.slim').render 
-			    #adql_tab.tab-pane
-			      == Slim::Template.new('views/_adql_form.slim').render 
-			    #fits_tab.tab-pane
-			      == Slim::Template.new('views/_fits_form.slim').render 
-		.push
-			
+	body
+		/! header
+		.navbar.navbar-inverse.navbar-top
+			.navbar-inner
+				.container
+					a.brand href="#" Virtual Observatory
+		/! end-header
+		
+		/! wrapper
+		.wrapper
+			/! content
+			.content
+				.row-fluid
+					.tabbable
+						ul.nav.nav-tabs
+							li.active
+								a data-toggle="tab" href="#query_tab" Query Search
+							li
+								a data-toggle="tab" href="#adql_tab"ADQL Search
+							li
+								a data-toggle="tab" href="#fits_tab" FITS Search
+						.tab-content
+							#query_tab.tab-pane.active
+								== Slim::Template.new('views/_query_form.slim').render 
+							#adql_tab.tab-pane
+								== Slim::Template.new('views/_adql_form.slim').render 
+							#fits_tab.tab-pane
+								== Slim::Template.new('views/_fits_form.slim').render
+			/! end-content
+			.push
+		/! end-wrapper
+    
+		/! footer
 		footer
-			.navbar.navbar-inverse
-				.navbar-inner.navbar-fixed-bottom
-					.container
-						 .row 
-						 	center Created by Mario Garces & Walter Fariña.
-					
-	
-	
-	script src="javascripts/jquery-1.9.1.min.js"
-	script src="javascripts/bootstrap.min.js"
-	script src="javascripts/dragtable.js"
-	script src="javascripts/sarissa.js"
-	script src="javascripts/tablednd.js"
-	script src="javascripts/voview_pkg.js"
-	script src="javascripts/main.js"	
+			.footer-wrapper
+				.navbar-bottom.navbar-inverse
+					.navbar-inner
+						.container-fluid
+							 .row-fluid
+							 	| Created by Mario Garces & Walter Fariña.
+		/! end-footer
+		
+		/! javascripts
+		script src="javascripts/jquery-1.9.1.min.js"
+		script src="javascripts/bootstrap.min.js"
+		script src="javascripts/dragtable.js"
+		script src="javascripts/sarissa.js"
+		script src="javascripts/tablednd.js"
+		script src="javascripts/voview_pkg.js"
+		script src="javascripts/main.js"
+		/! end-javascripts
+
+
+
