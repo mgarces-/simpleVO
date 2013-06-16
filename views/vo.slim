@@ -15,7 +15,7 @@ html
 		.navbar.navbar-inverse.navbar-top
 			.navbar-inner
 				.container
-					a.brand href="#" Virtual Observatory
+					a.brand href="/" Virtual Observatory
 		/! end-header
 		
 		/! wrapper
@@ -24,20 +24,29 @@ html
 			.content
 				.row-fluid
 					.tabbable
-						ul.nav.nav-tabs
+						ul.nav.nav-tabs#tabs
 							li.active
 								a data-toggle="tab" href="#query_tab" Query Search
 							li
 								a data-toggle="tab" href="#adql_tab"ADQL Search
 							li
 								a data-toggle="tab" href="#fits_tab" FITS Search
+							li.disabled
+								a data-toggle="tab" href="#results_tab" Results
+							li.disabled
+								a data-toggle="tab" href="#charts_tab" Charts
 						.tab-content
-							#query_tab.tab-pane.active
+							#query_tab.tab-pane.active.fade.in
 								== Slim::Template.new('views/_query_form.slim').render 
-							#adql_tab.tab-pane
+							#adql_tab.tab-pane.fade.in
 								== Slim::Template.new('views/_adql_form.slim').render 
-							#fits_tab.tab-pane
+							#fits_tab.tab-pane.fade.in
 								== Slim::Template.new('views/_fits_form.slim').render
+							#results_tab.tab-pane.fade.in
+								== Slim::Template.new('views/_results.slim').render 
+							#charts_tab.tab-pane.fade.in
+								== Slim::Template.new('views/_charts.slim').render
+
 			/! end-content
 			.push
 		/! end-wrapper
@@ -49,7 +58,7 @@ html
 					.navbar-inner
 						.container-fluid
 							 .row-fluid
-							 	| Created by Mario Garces & Walter Fariña.
+							 	| Created by Mario Garcés & Walter Fariña.
 		/! end-footer
 		
 		/! javascripts
