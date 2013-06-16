@@ -1,0 +1,376 @@
+body {
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-size: 90%;
+	color: #000;
+	background-color: #fff;
+	margin-top: 10px;
+	padding: 0;
+        
+        /* ST-ECF added: width is set to 90%. The text-align and margin attributes
+         force centering (text-align is necessary for IE */         
+        width: 90%;                
+        text-align: center;
+        margin: 0 auto;
+}
+
+/* busy cursor */
+.busy {
+	cursor: progress;
+}
+
+/* Links */
+
+a:link {
+	/* color: #494; */
+	text-decoration: none;
+}
+a:visited {
+	/* color: #040; */
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+	color: #000;
+}
+
+/* Form */
+
+input.submit {
+	color: #c00;
+}
+input.reset {
+	color: #00c;
+}
+
+/* styles for filter input boxes */
+
+form#filterForm input.filter {
+	background-color: #def;
+	color: #036;
+	width: 95%;
+	display: inline;
+}
+
+form#filterForm input.submit {
+	background-color: #eee;
+	font-weight: bold;
+	width: 95%;
+	/* width: 45%; */
+	color: #c00;
+}
+
+form#filterForm input.reset {
+	background-color: #eee;
+	font-weight: bold;
+	width: 95%;
+	/* width: 45%; */
+	color: #00c;
+}
+
+.searchnote {
+	font-size: 80%;
+	font-weight: normal;
+	line-height: 150%;
+	color: gray;
+	margin: 0 0 1em 0;
+	padding: 0 0;
+}
+
+.searchnote.compact {
+	line-height: 115%;
+}
+
+#output {
+	clear: both;
+}
+
+/* headings and paragraphs */
+
+h2 {
+	text-align: left;
+	font-style: italic;
+	color: #666;
+	clear: both;
+	font-size: 120%;
+}
+
+h3 {
+	padding: 0;
+	text-align: left;
+	display: inline;
+	font-size: 100%;
+}
+
+p { text-indent: 0px; }
+
+/* "button box" display */
+
+.bbox {
+	border: 1px solid #bca;
+	color: #494;
+	padding: 0 3px 0 3px;
+	margin: 2px;
+	background-color: #dec;
+	text-align: center;
+}
+.bbox:hover {
+	border-color: #271;
+	background-color: #9d8;
+	color: #000;
+	cursor: pointer;
+}
+
+.rightbutton {
+	font-size: 80%;
+	font-weight: normal;
+	line-height: 150%;
+	margin: -3em  2px 0 10em;
+	float: left;
+}
+
+/* VOTable */
+
+td.fieldparam {
+	vertical-align: top;
+	padding: 0 1em 0 0;
+}
+
+/* FELIX this sets the maximal size of the Columnds table*/
+td.fieldstable {
+        width: 66%;
+}
+
+
+
+table.parameters {
+	border: 1px solid #ccc;
+	font-size: 90%;
+}
+
+table.parameters th {
+	color: #fff;
+	background-color: #036;
+	border: 1px solid #ccc;
+	margin: 0 0;
+	padding: 0.1em 0.2em;
+}
+
+table.parameters tr:hover {
+	background-color: #ffb;
+}
+
+/* FELIX this removes the color-change on the Help column */
+table.parameters.paramstable tr:hover {
+	background-color: #fff;
+}
+
+table.fields {
+	border: 1px solid #ccc;
+	font-size: 90%;
+        /* FELIX this stretches the Columns and Help tables to maximal size*/
+        width: 100%;
+   clear: left; /* because can get 'caught' on reset column order button if is 2 rows */
+}
+
+table.fields th {
+	color: #fff;
+	background-color: #036;
+	border: 1px solid #ccc;
+	margin: 0 0;
+	padding: 0.1em 0.2em;
+}
+
+table.fields tr:hover {
+	background-color: #ffb;
+}
+
+table.fields tr.separator {
+/* background-color: #ddd; */
+	background-color: #f77;
+	font-style: italic;
+}
+
+table.fields tr.dragging {
+	background-color: #ffb;
+}
+
+table.fields tr.separator.dragging {
+	background-color: #f33;
+}
+
+.draggable {
+	cursor: move;
+}
+
+table.data {
+	clear: both;
+	border: 1px solid #ccc;
+	font-size: 90%;
+	table-layout: fixed;
+}
+
+tr.odd {
+	background-color: #eee;
+}
+
+table.data tr:hover {
+	background-color: #ffb;
+}
+
+table.data tr.selectedimage {
+	background-color: #bda;
+}
+
+table.data tr.selectedimage:hover {
+	background-color: #9d8;
+}
+
+table.data th {
+	color: #fff;
+	background-color: #036;
+	border: 1px solid #036;
+	margin: 0 0;
+        /* the second value specifies the horizontal distance of the headline text to the borders */
+	padding: 0.1em 0.2em;
+	cursor: pointer;
+}
+
+table.data th.unsortable {
+	cursor: default;
+}
+
+table.data th:hover {
+	background-color: #369;
+}
+
+table.data td {
+	/* white-space: nowrap; */
+	text-align: center;
+}
+
+table.data td.wrappable {
+	white-space: normal;
+	text-align: center;
+}
+
+th.ascending {
+        /* the "root" directory is THIS directory, not the directory of the calling program */
+	background-image: url(../images/asc.png);
+	background-position: 100% 50%;
+	background-repeat: no-repeat;
+}
+
+th.descending {
+	background-image: url(../images/desc.png);
+	background-position: 100% 50%;
+	background-repeat: no-repeat;
+}
+
+/* FELIX: added arrows for moving up and down the columns */
+span.arrow.down {
+        background-image: url(../images/arrow_down.png);
+        display: inline-block;
+        width: 11px;
+        height: 11px;
+
+}
+
+span.arrow.up {
+        background-image: url(../images/arrow_up.png);
+        display: inline-block;
+        width: 11px;
+        height: 11px;
+}
+
+/* paging buttons */
+
+div.buttons {
+	clear: both;
+	width: 100%;
+	height: 1.8em;
+	border-bottom: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	margin: 0.5em 0 0.5em 0;
+	padding: 0.3em 0 0.3em 0;
+	text-align: center;
+	font-size: 90%;
+}
+
+div.buttons div.pagelabel {
+	float: left;
+	padding: 0.3em 0 0 0;
+	margin: 0 0;
+	height: 0;
+}
+
+div.buttons div.pageLengthControl {
+}
+
+div.buttons a {
+	text-decoration: none;
+}
+div.buttons a:link {
+	color: #494;
+}
+div.buttons a:visited {
+	color: #494;
+}
+div.buttons a:hover {
+	color: #000;
+}
+
+div.buttons div.pagebuttons {
+	float: right;
+	padding: 0.3em 0 0 0;
+	margin: 0 0;
+	height: 0;
+}
+
+div.buttons span.button {
+	display: inline;
+	margin: 0 0;
+}
+
+div.buttons span.button.inactive {
+	color: #bbb;
+	text-decoration: none;
+	cursor: default;
+}
+
+.rev, .rrev {
+	padding: 2px 2px 2px 26px;
+	background-position: 0% 50%;
+	background-repeat: no-repeat;
+	text-align: left;
+}
+
+.fwd, .ffwd {
+	padding: 2px 26px 2px 2px;
+	background-position: 100% 50%;
+	background-repeat: no-repeat;
+	text-align: right;
+}
+
+.rrev { background-image: url(../images/afirst.gif); }
+.rev { background-image: url(../images/aprev.gif); }
+.fwd { background-image: url(../images/anext.gif); }
+.ffwd { background-image: url(../images/alast.gif); }
+
+.rrev:hover { background-image: url(../images/afirst_hl.gif); }
+.rev:hover { background-image: url(../images/aprev_hl.gif); }
+.fwd:hover { background-image: url(../images/anext_hl.gif); }
+.ffwd:hover { background-image: url(../images/alast_hl.gif); }
+
+.rrev.inactive { background-image: url(../images/afirst_in.gif); }
+.rev.inactive { background-image: url(../images/aprev_in.gif); }
+.fwd.inactive { background-image: url(../images/anext_in.gif); }
+.ffwd.inactive { background-image: url(../images/alast_in.gif); }
+
+@media print {
+	div.pagebuttons {
+		display: none;
+	}
+	div.pageLengthControl {
+		display: none;
+	}
+}

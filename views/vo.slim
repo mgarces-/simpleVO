@@ -4,8 +4,8 @@ html
 		meta http-equiv="Content-Type" content="text/html; charset=utf-8"
 		meta name="viewport" content="width=device-width, initial-scale=1.0"
 		
-		link rel="stylesheet" href="stylesheets/bootstrap.min.css" media="screen"
-		link rel="stylesheet" href="stylesheets/voview.css"
+		link rel="stylesheet" href="vendor/stylesheets/bootstrap.min.css" media="screen"
+		link rel="stylesheet" href="vendor/stylesheets/voview.css"
 		link rel="stylesheet" href="stylesheets/layout.css"
 		
 		title Virtual Observatory App.
@@ -22,31 +22,10 @@ html
 		.wrapper
 			/! content
 			.content
-				.row-fluid
-					.tabbable
-						ul.nav.nav-tabs#tabs
-							li.active
-								a data-toggle="tab" href="#query_tab" Query Search
-							li
-								a data-toggle="tab" href="#adql_tab"ADQL Search
-							li
-								a data-toggle="tab" href="#fits_tab" FITS Search
-							li.disabled
-								a data-toggle="tab" href="#results_tab" Results
-							li.disabled
-								a data-toggle="tab" href="#charts_tab" Charts
-						.tab-content
-							#query_tab.tab-pane.active.fade.in
-								== Slim::Template.new('views/_query_form.slim').render 
-							#adql_tab.tab-pane.fade.in
-								== Slim::Template.new('views/_adql_form.slim').render 
-							#fits_tab.tab-pane.fade.in
-								== Slim::Template.new('views/_fits_form.slim').render
-							#results_tab.tab-pane.fade.in
-								== Slim::Template.new('views/_results.slim').render 
-							#charts_tab.tab-pane.fade.in
-								== Slim::Template.new('views/_charts.slim').render
-
+				
+				
+				
+				
 			/! end-content
 			.push
 		/! end-wrapper
@@ -58,16 +37,16 @@ html
 					.navbar-inner
 						.container-fluid
 							 .row-fluid
-							 	| Created by Mario Garcés & Walter Fariña.
+							 	| Created for Academic Purposes
 		/! end-footer
 		
 		/! javascripts
-		script src="javascripts/jquery-1.9.1.min.js"
-		script src="javascripts/bootstrap.min.js"
-		script src="javascripts/dragtable.js"
-		script src="javascripts/sarissa.js"
-		script src="javascripts/tablednd.js"
-		script src="javascripts/voview_pkg.js"
+		script src="vendor/javascripts/jquery-1.9.1.min.js"
+		script src="vendor/javascripts/bootstrap.min.js"
+		script src="vendor/javascripts/dragtable.js"
+		script src="vendor/javascripts/sarissa.js"
+		script src="vendor/javascripts/tablednd.js"
+		script src="vendor/javascripts/voview.js"
 		script src="javascripts/main.js"
 		/! end-javascripts
 

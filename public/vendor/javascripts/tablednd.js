@@ -64,7 +64,6 @@ var TableDnD = TableDnD || {};
 					}
 				}
 			}
-
 			return false;
 		}
 	};
@@ -75,8 +74,7 @@ var TableDnD = TableDnD || {};
 			var droppedRow = _currenttable.dragObject;
 			// If we have a dragObject, then we need to release it,
 			// The row will already have been moved to the right place so we just reset stuff
-			//droppedRow.className = removeSubstring(droppedRow.className, "dragging");
-			droppedRow.className = droppedRow.className.replace(/ *dragging */g, " ")
+			droppedRow.className = removeSubstring(droppedRow.className, "dragging");
 			_currenttable.dragObject   = null;
 			// And then call the onDrop method in case anyone wants to do any post processing
 			_currenttable.onDrop(_currenttable.table, droppedRow);

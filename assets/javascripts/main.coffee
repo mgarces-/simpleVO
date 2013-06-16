@@ -17,7 +17,7 @@ $ ->
 		$('#tabs li.disabled').removeClass('disabled')
 		$('#tabs a[href="#results_tab"]').tab('show')
 	)
-
+	
 	$('#reset').click( ->
 		# clear form
 		$('#tabs a[href="#results_tab"],[href="#charts_tab"]').each((tab) ->
