@@ -12,3 +12,6 @@ Just install dependencies and go on.
 
 Now visit http://localhost:9292 in your browser.
 
+Copyright/Credits
+-----------------
+Main view is based on ALMA ASA. 
