@@ -1,0 +1,112 @@
+td.category
+	.categorytitle Energy
+	
+	.inputdiv
+		.elementdiv
+			| Frequency
+			.inputfielddiv
+				input name="energy.frequency-asu" type="text"
+		.tooltip
+			.floatleft
+				b Frequency
+				br
+					| Reference sky frequency.
+				br
+				br
+				b Description
+				br
+					| Observed (tuned) reference frequency on the sky.
+				br
+				br
+				b Unit
+				br
+					| GHz
+				br
+				br
+				b Example
+				br
+				span.examples
+					p &gt;100
+					p &lt;300
+					p 100 .. 300
+					p !(100 .. 300)
+					p 100 .. 300 | 600 .. 900
+					
+	.inputdiv
+		.elementdiv
+			| Bandwidth
+			.inputfielddiv
+				input name="energy.bandwidth-asu" type="text"
+		.tooltip
+			.floatleft
+				b Bandwidth
+				br
+					| Total bandwidth.
+				br
+				br
+				b Description
+				br
+					| Total Bandwidth
+				br
+				br
+				b Unit
+				br
+					| GHz
+				br
+				br
+				b Example
+				br
+				span.examples
+					p 1.2 .. 2.5
+					p &gt;2.5
+					p &lt;1.2
+					p &lt;1.2 | &gt;4.0
+	
+	.inputdiv
+		.elementdiv
+			| Spectral resolution
+			.inputfielddiv
+				input name="energy.resolution-asu" type="text"
+	.tooltip
+		.floatleft
+			b Spectral resolution
+			br
+				| Estimated frequency resolution (in kHz).
+			br
+			br
+			b Description
+			br
+				| Estimated frequency resolution from all the spectral windows, using median values of channel widths.
+			br
+			br
+			b Unit
+			br
+				| kHz
+			br
+			br
+			b Example
+			br
+			span.examples
+				p &lt;70
+				p &gt;1e6
+				p 2e6 .. 3e6
+						
+						
+	.inputdiv
+		.elementdiv
+			| Band
+			.inputfielddiv
+				select#band multiple="multiple" name="band-asu"
+					option value="3" 3  (84-116 GHz)
+					option value="6" 6  (211-275 GHz)
+					option value="7" 7  (275-373 GHz)
+					option value="9" 9  (602-720 GHz)
+		.tooltip
+			.floatleft
+				b Band
+				br
+					| ALMA receiver band.
+				brbr
+				b Description
+				br 
+					| ALMA receiver band.

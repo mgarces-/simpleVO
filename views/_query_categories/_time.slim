@@ -1,0 +1,56 @@
+td.category
+	.categorytitle Time
+	.inputdiv
+		.elementdiv
+			| Observation date
+			.inputfielddiv
+				input name="start_date-asu" type="text"
+		.tooltip
+			.floatleft
+			b Observation date
+			br
+			| Field integration start timestamp.
+			br
+			br
+			b Description
+			br
+			| Start time of the first integration on the field.
+			br
+			br
+			b Example
+			br
+			span.examples
+				p &gt;01-01-2011
+				p &lt;31-12-2011
+				p 01-01-2011 .. 01-02-2011
+			
+			
+	.inputdiv
+		.elementdiv
+			| Integration time
+			.inputfielddiv
+				input name="int_time-asu" type="text"
+		.tooltip
+			.floatleft
+			b Integration time
+			br
+			| Total field integration time.
+			br
+			br
+			b Description
+			br
+			| Aggregated integration time for the field in the ASDM.
+			br
+			br
+			b Unit
+			br
+			| s
+			br
+			br
+			b Example
+			br
+			span.examples
+				p &gt;12.5
+				p &lt;30
+				p 30 .. 60
+				p !(1 .. 300)

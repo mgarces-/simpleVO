@@ -1,0 +1,154 @@
+/* This file contains the css that drives the search interface. Where necessary already-defined css for elements in 
+   jQuery widgets or voview are overridden
+   F. Stoehr, ESO/ALMA, 2011 */
+
+body                         {font-family: Arial, Helvetica, SansSerif; font-size: 85%; color: #112E56; margin: 0px;}
+
+/* voview.css changes this behaviour so we have to change it back */
+a:link                       {text-decoration: underline;}                                   
+
+.inputdiv                    {cursor: pointer;}
+.inputdiv input:focus        {outline: none;}
+.inputdiv input[type=text]   {width: 98%;  color: #4179B4; margin-bottom: 2px; border-color: #666666 #DDDDDD #DDDDDD #666666; border-style: solid; border-width: 1px;}
+div.categorytitle {margin: 2px;}
+div.inputdiv {margin: 2px;}
+
+#queryForm table             {margin: auto; border-spacing: 8px; text-align: left; width: 1040px;}
+#queryForm table tr td       {width: 100%; background-color: #EEF3F5;}
+#queryForm table tr td table {width: 100%; border-spacing: 1px; border-width: 2px;}
+#queryForm .category         {width: 16%; vertical-align: top; border: 1px solid #CCCCCC; /*border-radius: 0.3em 0.3em 0.3em 0.3em;*/}
+#queryForm .categorytitle    {font-size: large; font-weight: bold; display: inline-block; padding-bottom: 10px; color: #4179B4;}
+#queryForm .placeholder      {width: 16%; vertical-align: top; border: 0px solid #CCCCCC}
+
+/* removed the margin. I prefer Felix's look, but this is for consistency with almascience.org */
+.tooltip                     {background-color: #EEF3F5; box-shadow: 0 0 8px #000000; color: #112E56; margin: 0px;}
+.tooltip b                   {color: #4179B4; }
+
+.headerclass                 {margin: auto; background-color: #1e406d; text-align: left;}
+
+/* mainfraime is the css to allow for the centered content of the whole page */
+.mainframe                   {margin: auto; text-align: left; padding-top: 10px; padding-bottom: 10px; width: 1024px;}
+
+/* the main table looks like offset horizontally because of the border-spacing. This offset is compensated here. */
+.maintable                   {padding-left: 0px; margin-left: -8px;}
+
+.buttonclass                 {margin: auto; text-align: left; padding-bottom: 6px; padding-top: 4px;}         
+.buttonclass input           {background: none; border: 1px solid #888888; color: #000000; cursor: pointer;}         
+.buttonclass input:hover     {background-color: #fdf5ce;}
+
+/* need this to float the divs inside without overlapping with subsequent divs */
+#controls {width: 100%; overflow: auto}
+#controls .buttonclass {float: left}
+#controls #radiobuttons {float: left}
+
+.titleclass                  {font-size: x-large; font-weight: 900; color: #4179B4; margin-top: 10px; margin-bottom: 10px;}
+
+.bodydiv                     {text-align: center; width: 100%;}
+
+.helpandparameters           {width: 20%;}
+
+/* tabs: this css overrides the standard tab css coming with jQuery */
+.ui-state-active, 
+.ui-widget-content .ui-state-active, 
+.ui-widget-header .ui-state-active {
+	border: 1px solid #4179B4;
+	background: white url(images/ui-bg_glass_65_ffffff_1x400.png) 50% 50% repeat-x;
+	font-weight: bold;
+	color: #4179B4;
+}
+
+.ui-tabs .ui-tabs-nav        {margin: 0; padding: 0em 0em 0;}         
+.ui-widget-content           {color: #112E56; background: none; background-color: #fff; border: none;}         
+.ui-widget                   {font-size: 100%;}         
+.ui-widget-header            {background: #fff; border: none; border-bottom: 1px solid #CCCCCC; color: #FFFFFF; font-weight: bold;}         
+.ui-corner-all, 
+.ui-corner-bottom, 
+.ui-corner-right, 
+.ui-corner-br                {border-radius: 0px;}         
+.ui-tabs .ui-tabs-nav li     {margin: 0 1em 1px 0;}         
+.ui-tabs .ui-tabs-nav li a   {float: left; padding: 0.25em 0.5em; text-decoration: none;}         
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected a, 
+.ui-tabs .ui-tabs-nav li.ui-state-disabled a, 
+.ui-tabs .ui-tabs-nav li.ui-state-processing a 
+                             {cursor: pointer; text-decoration: none;}         
+.ui-tabs .ui-tabs-panel      {padding: 10px 0px;}         
+
+.ui-state-default a, 
+.ui-state-default a:link, 
+.ui-state-default a:visited  {color: #4179B4;}         
+.ui-state-active a, 
+.ui-state-active a:link, 
+.ui-state-active a:visited   {color: #4179B4;}      
+.ui-state-hover a, 
+.ui-state-hover a:hover      {color: #4179B4;}         
+
+/* style of the jQuery select boxes */         
+.ui-multiselect.multiselectclass {background: white; border-color: #666666 #DDDDDD #DDDDDD #666666; border-style: solid; border-width: 1px; color: #4179B4; font-weight: normal; padding: 0px;}         
+.ui-multiselect-menu.multiselectclass {border: solid #666666 1px;}
+/* shrink the multiselct text size a little, it was too large and causing the UI to jump around */
+.ui-multiselect-checkboxes {font-size: 0.9em;}
+
+/* :focus {outline: 0;} optionally */
+
+/* Mask applied on the Query page during the search */
+#queryOverlay                {display:none; text-align: center;}
+
+/* voview: this css overrides the standard css coming with voview*/  
+form#filterForm input.filter {background-color: #fff; color: #003366; display: inline; width: 95%; color: #4179B4; border-color: #666666 #DDDDDD #DDDDDD #666666; border-style: solid; border-width: 1px;}
+
+tr.odd                       {background-color: #EEF3F5;}
+
+.bbox                        {background-color: #FFF; border: 1px solid #CCC; color: #000; margin: 2px; padding: 0 3px; text-align: center;}
+
+div#breadcrumb-trail 		{color: black; font-size: 0.9em;}
+img.breadcrumb 				{vertical-align: middle;}
+
+div.buttons a, 
+div.buttons a:link, 
+div.buttons a:visited        {color: #4179B4;}
+
+table.data tr:hover, 
+table.fields tr:hover        {background-color: #fdf5ce;}
+table.parameters tr:hover    {background-color: transparent;}
+
+table.data th, 
+table.parameters th, 
+table.fields th              {background-color: #112E56;}
+
+table.data tr.selectedimage  {background-color: #EB8F56;}
+table.data tr.selectedimage:hover 
+                             {background-color: #DB7F00;}
+
+table.fields tr.separator    {background-color: #EB8F56; font-style: italic;}
+table.fields tr.dragging     {background-color: #fdf5ce;}
+table.fields tr.separator.dragging {background-color: #4179B4;}   
+
+/* When using the checkall checkbox, these buttons are not needed any more */
+.searchnote                  {display: none;}
+
+/* source name resolution */
+
+/*asdfasdf.sourcenameresolverfield {margin-bottom: 0px; width: 98%; border-color: #666666 #DDDDDD #DDDDDD #666666; border-style: solid; border-width: 1px;}
+#asdfsource_name_sesame.sourcenameresolverfield.inputfielddiv input {width: 100%; border: none; margin: 0; padding: 0;}
+#source_name_sesame.sourcenameresolverfield table, .sourcenameresolverfield tbody, .sourcenameresolverfield td, .sourcenameresolverfield tr {border: 0px none none; margin: 0; padding: 0; background-color: white; vertical-align: top;}
+*/
+
+
+#sourcenameresolver {border-color: #666666 #DDDDDD #DDDDDD #666666; border-style: solid; border-width: 1px; background-color: white; width: 98%}
+#sourcenameresolver table, #sourcenameresolver table tr, #sourcenameresolver table tr td {background-color: white; padding: 0; margin: 0; border: none;}
+#sourcenameresolver table tr td input {border: none; margin: -1px;}
+#sourcenameresolver table tr td img   {margin-top: 1px; margin-bottom: -2px; margin-right: 3px;}
+#sourcenameresolver .ok, #sourcenameresolver .bad, #sourcenameresolver .work {display: none;}
+#tooltipresolverdiv div {padding-left: 1.0em; padding: 1em; border: 1px solid #888888;}
+.tooltip .floatleft {width: 198px; float: left;}
+
+#portal-breadcrumbs {
+font-size: 70%;
+margin-bottom: 10px;
+margin-left: 0.25em;
+}
+#portal-breadcrumbs a {
+border-bottom: none;
+display: inline-block;
+}
+

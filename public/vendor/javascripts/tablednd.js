@@ -1,7 +1,23 @@
 // ===================================================================
 // Author: Denis Howlett <feedback@isocra.com>
-// WWW: http://www.isocra.com/articles/table_dnd.php
+// WWW: http://www.isocra.com/
 //
+// NOTICE: You may use this code for any purpose, commercial or
+// private, without any further permission from the author. You may
+// remove this notice from your final code if you wish, however we
+// would appreciate it if at least the web site address is kept.
+//
+// You may *NOT* re-distribute this code in any way except through its
+// use. That means, you can include it in your product, or your web
+// site, or any other form where the code is actually being used. You
+// may not put the plain javascript up on your site for download or
+// include it in your javascript libraries for download.
+// If you wish to share this code with others, please just point them
+// to the URL instead.
+//
+// Please DO NOT link directly to this .js files from your site. Copy
+// the files to your server and use them there. Thank you.
+// ===================================================================
 // 11/6/07: Edited by RLW
 // - Eliminated global variables and put everything in TableDnD namespace
 // - Use class + CSS to highlight flagged rows to make it play better with other styles
@@ -64,6 +80,7 @@ var TableDnD = TableDnD || {};
 					}
 				}
 			}
+
 			return false;
 		}
 	};
@@ -74,7 +91,8 @@ var TableDnD = TableDnD || {};
 			var droppedRow = _currenttable.dragObject;
 			// If we have a dragObject, then we need to release it,
 			// The row will already have been moved to the right place so we just reset stuff
-			droppedRow.className = removeSubstring(droppedRow.className, "dragging");
+			//droppedRow.className = removeSubstring(droppedRow.className, "dragging");
+			droppedRow.className = droppedRow.className.replace(/ *dragging */g, " ")
 			_currenttable.dragObject   = null;
 			// And then call the onDrop method in case anyone wants to do any post processing
 			_currenttable.onDrop(_currenttable.table, droppedRow);

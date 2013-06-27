@@ -1,0 +1,52 @@
+td.category
+	.categorytitle Observation
+	.inputdiv
+		.elementdiv
+			| Water vapour
+			.inputfielddiv
+				input name="pwv-asu" type="text"
+		.tooltip
+			.floatleft
+			b Water vapour
+			br
+			| Estimated precipitable water vapour (in mm).
+			br
+			br
+			b Description
+			br
+			| Estimated precipitable water vapour from the XML_CALWVR_ENTITIES table.
+			br
+			br
+			b Unit
+			br
+			| mm
+			br
+			br
+			b Example
+			br
+			span.examples
+				p !null
+				p &lt;0.5|null
+				p &lt; 0.49 | &gt;55.5
+				
+	.inputdiv
+		.elementdiv
+			| Scan intent
+			.inputfielddiv
+				select#scan_intent multiple="multiple" name="scan_intent-asu"
+					optgroup label="Science"
+						option value="=%TARGET%" Observe target
+					optgroup label="Standard Calibration"
+						option value="=%AMPLI%" Amplitude
+						option value="=%BANDPASS%" Bandpass
+						option value="=%PHASE%" Phase
+						option value="=%POINTING%" Pointing
+		.tooltip
+			.floatleft
+				b Scan intent
+				br
+				| Scan intent of searched fields
+				br
+				br
+				b Description
+				br Scan intent list for the observed field.

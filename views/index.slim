@@ -1,0 +1,83 @@
+doctype html
+html
+	head
+		meta content="text/html; charset=utf-8" http-equiv="Content-Type"
+		link href="favicon.ico" rel="shortcut icon" type="image/x-icon"
+		
+		link rel="stylesheet" type="text/css" href="vendor/stylesheets/jquery-ui-1.8.14.custom.css"
+		link rel="stylesheet" type="text/css" href="vendor/stylesheets/jquery.multiselect.css"
+		link rel="stylesheet" type="text/css" href="vendor/stylesheets/tooltip-generic.css"
+		link rel="stylesheet" type="text/css" href="vendor/stylesheets/voview.css"
+		link rel="stylesheet" type="text/css" href="vendor/stylesheets/queryform.css"
+		
+		link rel="stylesheet" type="text/css" href="stylesheets/layout.css"
+	
+		script type="text/javascript" src="vendor/javascripts/jquery-1.6.2.min.js"
+		script type="text/javascript" src="vendor/javascripts/jquery-ui-1.8.14.custom.min.js"
+		script type="text/javascript" src="vendor/javascripts/jquery.multiselect.js"
+		script type="text/javascript" src="vendor/javascripts/jquery.tools.min.js"
+		
+		title VO Frontend App.
+		
+	body.section-front-page.template-document_view.background-color dir="ltr"
+		.headerclass
+			.mainframe
+				/! insert logo (image)
+		.bodydiv
+			/! Title
+			.titleclass Virtual Observatory Frontend App.
+
+			/! Tabs
+			#tabs
+				ul
+					li
+						a href="#queryFormTab" Query Form
+					li
+						a href="#adqlTab" ADQL Search
+					li
+						a href="#resultTableTab" Result Table
+					li
+						a href="#chartsTab" Charts
+						
+				/! Query Form
+				== Slim::Template.new('views/_query_tab.slim').render
+
+				/! ADQL Form
+				== Slim::Template.new('views/_adql_tab.slim').render
+
+				/! Results Form
+				== Slim::Template.new('views/_results_tab.slim').render
+
+				/! Charts Form
+				== Slim::Template.new('views/_charts_tab.slim').render
+
+			
+	/! Overlay animation
+	#queryOverlay
+		img alt="" src="vendor/images/queryoverlay.gif"
+		br
+		 | Searching
+
+
+	
+	javascript:
+		$(function () {
+			try {
+				// this is read from property file and inserted in the SystemSetup context aware java class
+				var requestHandlerUrl = "https://almascience.nrao.edu/rh/confirmation";
+				var aq = new AsaQuery(requestHandlerUrl);
+				aq.init();
+			} catch(err) {
+				// only here for the development phase
+				alert(err.message);
+			}
+		});
+		
+	
+	script type="text/javascript" src="vendor/javascripts/sarissa.js"
+	script type="text/javascript" src="vendor/javascripts/tablednd.js"
+	script type="text/javascript" src="vendor/javascripts/dragtable.js"
+	script type="text/javascript" src="vendor/javascripts/voview_pkg.js"
+	script type="text/javascript" src="vendor/javascripts/sesame.js"
+	script type="text/javascript" src="vendor/javascripts/alma/queryform.js"
+	script type="text/javascript" src="vendor/javascripts/alma/asaquery.js"

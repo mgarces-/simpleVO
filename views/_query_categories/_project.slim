@@ -1,0 +1,80 @@
+td.category
+	.categorytitle Project
+
+	.inputdiv
+		.elementdiv
+			| Project code
+			.inputfielddiv
+				/! the double 'project' in this case is required because of naming conventions
+				input name="project_code-asu" type="text"
+		.tooltip
+			.floatleft
+				b Project code
+				br
+				| Project code.
+				br
+				br
+				b Description
+				br
+				| Project code, in the form YYYY.NNNNN.C.AAA, where:
+				br
+				br
+				b Example
+				br
+				span.examples
+					p 2010.2.00010.N
+					p 2010.*
+					p 2010.?.*.CSV
+					p 
+						| *.CSV
+					p !(*.CSV | *.SIM)
+
+	.inputdiv
+		.elementdiv
+			| Project Title
+			.inputfielddiv
+					input name="project.title-substr" type="text"
+		.tooltip
+			.floatleft
+				b Project Title
+				br
+				| ALMA Project Title
+				br
+				br
+				b Description
+				br
+				| Case-insensitive search over the project title
+				br
+				br
+				b Example
+				br
+				span.examples
+					p 
+						| *GALAXY*
+					p 
+						| *?ebula*
+				
+				
+	.inputdiv
+		.elementdiv
+			| PI Name
+			.inputfielddiv
+				input name="project.pi_name-substr" type="text"
+		.tooltip
+			.floatleft
+				b PI Full Name
+				br
+				| ALMA PI name
+				br
+				br
+				b Description
+				br
+				| case-insensitive partial match over the full PI name. Wildcards can be used
+				br
+				br
+				b Example
+				br
+				span.examples
+					p Smith, Fred
+					p SMI*
+					p fr?d

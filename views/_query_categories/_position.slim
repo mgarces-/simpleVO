@@ -1,0 +1,131 @@
+tr
+td.category
+	.categorytitle Position
+	
+	.inputdiv
+		.elementdiv
+			| Source name (Sesame)
+			br
+			#sourcenameresolver.inputfielddiv
+				table
+					tr
+						td
+							input#source_name_sesame name="source_name_sesame" type="text"
+						td
+							img#source_name_ok_img.ok alt="" src="vendor/images/ok_small.png"
+						td
+							img#source_name_bad_img.bad alt="" src="vendor/images/bad_small.png"
+						td
+							img#source_name_work_img.work alt="" src="vendor/images/queryoverlay_small.gif"	
+		.tooltip
+			.floatleft
+				b Source name (Sesame)
+				br
+					| Source name to be resolved with 
+					a href="http://cdsweb.u-strasbg.fr/cgi-bin/Sesame" target="_blank" Sesame
+				br
+				br
+				b Description
+				br
+					| We use the external resolver Sesame to obtain
+					| coordinates for the source. Sesame queries the Simbad,
+					| NED and VizieR services.
+				br 
+				br
+				br
+				b Example
+				br
+				a href="#" onclick="$(this).closest('div.inputdiv').find('input').val('M87').trigger('keydown'); return false;" M87
+				br
+					| NGC3375
+					
+			#tooltipresolverdiv.floatleft
+				.tooltip
+					.floatleft
+						br
+						| No tooltip information is available
+
+
+	.inputdiv
+		.elementdiv
+			| Source name (Local Catalog)
+			.inputfielddiv
+				input name="source_name-asu" type="text"
+		.tooltip
+			.floatleft
+				b Source name
+				br
+					| source name.
+				br
+				br
+				b Description
+				br
+					| Name of the source as registered in the ASDM. Partial matches through wildcards (?, *), and boolean OR expressions ("|"), can be used.
+				br
+				br
+				b Example
+				br
+				span.examples
+					p GRB021004
+					p &quot;R Scl&quot;
+	
+	
+	
+	.inputdiv
+		.elementdiv
+			| RA Dec
+			.inputfielddiv
+				/! special case - does not follow the columns naming conventions
+				input name="raDecCoordinates" type="text"
+		.tooltip
+			.floatleft
+				b RA Dec
+				br
+					| Right Ascension and Declination
+				br
+				br
+				b Description
+				br
+					| Right Ascension (RA) and Declination, separated by whitespace, either in decimal degrees, or in Hours:Minutes:Seconds for RA, +Degrees:Minutes:Seconds for Declination.
+				br
+				br
+				b Unit
+				br
+					| Hours:Minutes:Seconds and Degrees:Minutes:Seconds
+				br
+				br
+				b Example
+				br
+				span.examples
+					p 04:18:21.27 +38:01:35.7
+					p 064.5886550 +38.0266111
+					p 04:18:21.27 +38.0266111
+					p 064.5886550 +38:01:35.7
+
+	.inputdiv
+		.elementdiv
+			| Search radius
+			.inputfielddiv
+				/! special case - does not follow the columns naming conventions
+				input#searchRadius name="radius" type="text"
+		.tooltip
+			.floatleft
+				b Search radius
+				br
+					| Search radius of the cone centered around RA/Dec.
+				br
+				br
+				b Description
+				br
+					| Search radius, in sexagesimal or in decimal degrees, of the cone centered around RA/Dec.
+				br
+				br
+				b Example
+				br
+				span.examples
+					p 0:10:00
+					p 0.166667
+					p 1:00:00
+					p 1.0
+					p 0:00:30
+					p 0.008333

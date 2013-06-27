@@ -1,16 +1,10 @@
+/*	font-family: Geneva, Arial, Helvetica, sans-serif; */
 body {
-	font-family: Geneva, Arial, Helvetica, sans-serif;
-	font-size: 90%;
+	font-size: 100%;
 	color: #000;
 	background-color: #fff;
 	margin-top: 10px;
 	padding: 0;
-        
-        /* ST-ECF added: width is set to 90%. The text-align and margin attributes
-         force centering (text-align is necessary for IE */         
-        width: 90%;                
-        text-align: center;
-        margin: 0 auto;
 }
 
 /* busy cursor */
@@ -41,6 +35,9 @@ input.submit {
 input.reset {
 	color: #00c;
 }
+input.defaultComment {
+	color: #999	
+}
 
 /* styles for filter input boxes */
 
@@ -68,7 +65,7 @@ form#filterForm input.reset {
 }
 
 .searchnote {
-	font-size: 80%;
+	font-size: 0.8em;
 	font-weight: normal;
 	line-height: 150%;
 	color: gray;
@@ -91,14 +88,14 @@ h2 {
 	font-style: italic;
 	color: #666;
 	clear: both;
-	font-size: 120%;
+	font-size: 1.2em;
 }
 
 h3 {
 	padding: 0;
 	text-align: left;
 	display: inline;
-	font-size: 100%;
+	font-size: 1.0em;
 }
 
 p { text-indent: 0px; }
@@ -121,7 +118,7 @@ p { text-indent: 0px; }
 }
 
 .rightbutton {
-	font-size: 80%;
+	font-size: 0.8em;
 	font-weight: normal;
 	line-height: 150%;
 	margin: -3em  2px 0 10em;
@@ -135,16 +132,9 @@ td.fieldparam {
 	padding: 0 1em 0 0;
 }
 
-/* FELIX this sets the maximal size of the Columnds table*/
-td.fieldstable {
-        width: 66%;
-}
-
-
-
 table.parameters {
 	border: 1px solid #ccc;
-	font-size: 90%;
+	font-size: 0.9em;
 }
 
 table.parameters th {
@@ -159,16 +149,9 @@ table.parameters tr:hover {
 	background-color: #ffb;
 }
 
-/* FELIX this removes the color-change on the Help column */
-table.parameters.paramstable tr:hover {
-	background-color: #fff;
-}
-
 table.fields {
 	border: 1px solid #ccc;
-	font-size: 90%;
-        /* FELIX this stretches the Columns and Help tables to maximal size*/
-        width: 100%;
+	font-size: 0.9em;
    clear: left; /* because can get 'caught' on reset column order button if is 2 rows */
 }
 
@@ -205,8 +188,8 @@ table.fields tr.separator.dragging {
 table.data {
 	clear: both;
 	border: 1px solid #ccc;
-	font-size: 90%;
-	table-layout: fixed;
+	font-size: 0.9em;
+/*	table-layout: fixed; */
 }
 
 tr.odd {
@@ -230,8 +213,7 @@ table.data th {
 	background-color: #036;
 	border: 1px solid #036;
 	margin: 0 0;
-        /* the second value specifies the horizontal distance of the headline text to the borders */
-	padding: 0.1em 0.2em;
+	padding: 0.1em 0.8em;
 	cursor: pointer;
 }
 
@@ -254,32 +236,15 @@ table.data td.wrappable {
 }
 
 th.ascending {
-        /* the "root" directory is THIS directory, not the directory of the calling program */
-	background-image: url(../images/asc.png);
+	background-image: url(../img/asc.png);
 	background-position: 100% 50%;
 	background-repeat: no-repeat;
 }
 
 th.descending {
-	background-image: url(../images/desc.png);
+	background-image: url(../img/desc.png);
 	background-position: 100% 50%;
 	background-repeat: no-repeat;
-}
-
-/* FELIX: added arrows for moving up and down the columns */
-span.arrow.down {
-        background-image: url(../images/arrow_down.png);
-        display: inline-block;
-        width: 11px;
-        height: 11px;
-
-}
-
-span.arrow.up {
-        background-image: url(../images/arrow_up.png);
-        display: inline-block;
-        width: 11px;
-        height: 11px;
 }
 
 /* paging buttons */
@@ -293,7 +258,7 @@ div.buttons {
 	margin: 0.5em 0 0.5em 0;
 	padding: 0.3em 0 0.3em 0;
 	text-align: center;
-	font-size: 90%;
+	font-size: 0.9em;
 }
 
 div.buttons div.pagelabel {
@@ -351,20 +316,20 @@ div.buttons span.button.inactive {
 	text-align: right;
 }
 
-.rrev { background-image: url(../images/afirst.gif); }
-.rev { background-image: url(../images/aprev.gif); }
-.fwd { background-image: url(../images/anext.gif); }
-.ffwd { background-image: url(../images/alast.gif); }
+.rrev { background-image: url(../img/afirst.gif); }
+.rev { background-image: url(../img/aprev.gif); }
+.fwd { background-image: url(../img/anext.gif); }
+.ffwd { background-image: url(../img/alast.gif); }
 
-.rrev:hover { background-image: url(../images/afirst_hl.gif); }
-.rev:hover { background-image: url(../images/aprev_hl.gif); }
-.fwd:hover { background-image: url(../images/anext_hl.gif); }
-.ffwd:hover { background-image: url(../images/alast_hl.gif); }
+.rrev:hover { background-image: url(../img/afirst_hl.gif); }
+.rev:hover { background-image: url(../img/aprev_hl.gif); }
+.fwd:hover { background-image: url(../img/anext_hl.gif); }
+.ffwd:hover { background-image: url(../img/alast_hl.gif); }
 
-.rrev.inactive { background-image: url(../images/afirst_in.gif); }
-.rev.inactive { background-image: url(../images/aprev_in.gif); }
-.fwd.inactive { background-image: url(../images/anext_in.gif); }
-.ffwd.inactive { background-image: url(../images/alast_in.gif); }
+.rrev.inactive { background-image: url(../img/afirst_in.gif); }
+.rev.inactive { background-image: url(../img/aprev_in.gif); }
+.fwd.inactive { background-image: url(../img/anext_in.gif); }
+.ffwd.inactive { background-image: url(../img/alast_in.gif); }
 
 @media print {
 	div.pagebuttons {

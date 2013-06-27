@@ -7,6 +7,7 @@ require 'sass/plugin/rack'
 require './vo_app'
 
 Sass::Plugin.options[:template_location] = '/assets/stylesheets'
+Sass::Plugin.options[:css_location] = "public/stylesheets"
 Sass::Plugin.options[:style] = :compressed
 use Sass::Plugin::Rack
 

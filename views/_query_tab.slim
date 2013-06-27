@@ -1,0 +1,17 @@
+#queryFormTab
+	form#queryForm action="#" name="queryForm"
+		input name="query_string" type="hidden" value=""
+		
+		#controls
+			.buttonclass
+				input.context type="submit" value="Search"
+				input action="aq.resetFiels(); return false;" type="reset" value="Reset"
+				
+		.maintable
+			table
+					- Dir.glob("views/_query_categories/{_position,_energy,_time,_polarisation}.slim") do |category_template|
+						== Slim::Template.new("#{category_template}").render
+					tr
+					- Dir.glob("views/_query_categories/{_observation,_project,_placeholder,_options}.slim") do |category_template|
+						== Slim::Template.new("#{category_template}").render
+					tr
