@@ -236,13 +236,13 @@ table.data td.wrappable {
 }
 
 th.ascending {
-	background-image: url(../img/asc.png);
+	background-image: url(../images/asc.png);
 	background-position: 100% 50%;
 	background-repeat: no-repeat;
 }
 
 th.descending {
-	background-image: url(../img/desc.png);
+	background-image: url(../images/desc.png);
 	background-position: 100% 50%;
 	background-repeat: no-repeat;
 }
@@ -316,20 +316,20 @@ div.buttons span.button.inactive {
 	text-align: right;
 }
 
-.rrev { background-image: url(../img/afirst.gif); }
-.rev { background-image: url(../img/aprev.gif); }
-.fwd { background-image: url(../img/anext.gif); }
-.ffwd { background-image: url(../img/alast.gif); }
+.rrev { background-image: url(../images/afirst.gif); }
+.rev { background-image: url(../images/aprev.gif); }
+.fwd { background-image: url(../images/anext.gif); }
+.ffwd { background-image: url(../images/alast.gif); }
 
-.rrev:hover { background-image: url(../img/afirst_hl.gif); }
-.rev:hover { background-image: url(../img/aprev_hl.gif); }
-.fwd:hover { background-image: url(../img/anext_hl.gif); }
-.ffwd:hover { background-image: url(../img/alast_hl.gif); }
+.rrev:hover { background-image: url(../images/afirst_hl.gif); }
+.rev:hover { background-image: url(../images/aprev_hl.gif); }
+.fwd:hover { background-image: url(../images/anext_hl.gif); }
+.ffwd:hover { background-image: url(../images/alast_hl.gif); }
 
-.rrev.inactive { background-image: url(../img/afirst_in.gif); }
-.rev.inactive { background-image: url(../img/aprev_in.gif); }
-.fwd.inactive { background-image: url(../img/anext_in.gif); }
-.ffwd.inactive { background-image: url(../img/alast_in.gif); }
+.rrev.inactive { background-image: url(../images/afirst_in.gif); }
+.rev.inactive { background-image: url(../images/aprev_in.gif); }
+.fwd.inactive { background-image: url(../images/anext_in.gif); }
+.ffwd.inactive { background-image: url(../images/alast_in.gif); }
 
 @media print {
 	div.pagebuttons {

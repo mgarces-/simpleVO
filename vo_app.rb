@@ -12,20 +12,23 @@ class VOApp < Sinatra::Base
   
   # Proxy to Sesame Web Service
   get '/proxySesame' do
-    requested_catalog = RestClient.get "http://cdsweb.u-strasbg.fr/cgi-bin/nph-sesame/-ox/SNV?"+params.keys[0]
+    ws_url = "http://cdsweb.u-strasbg.fr/cgi-bin/nph-sesame/-ox/SNV?"
+    source_name = params.keys[0]
     
     content_type 'content/xml'
-    requested_catalog
+    RestClient.get ws_url+source_name
   end
   
   # Proxy to VO Archive Web Service
   get '/search' do
-    votable = RestClient.get "https://almascience.nrao.edu/aq/search\?source_name_sesame\=m87\&radius\=0:10:00\&scan_intent-asu\=\=\*TARGET\*\&viewFormat\=asdm\&download\=true"
+    
+    ws_url = "https://almascience.nrao.edu/aq/search?"
+    query_string = params.to_a.map{|x| "#{x[0]}=#{x[1]}"}.join("&")
     
     content_type 'type/votable+xml'
-    votable
+    RestClient.get ws_url+query_string
   end
-  
-  
-  
 end
+
+
+

@@ -20,11 +20,14 @@ html
 		title VO Frontend App.
 		
 	body.section-front-page.template-document_view.background-color dir="ltr"
-		.headerclass
-			.mainframe
-				/! insert logo (image)
+		/! Header
+		/.headerclass
+		/	.mainframe
+		/		insert logo (image)
+		
 		.bodydiv
 			/! Title
+		.mainframe
 			.titleclass Virtual Observatory Frontend App.
 
 			/! Tabs
@@ -38,7 +41,7 @@ html
 						a href="#resultTableTab" Result Table
 					li
 						a href="#chartsTab" Charts
-						
+					
 				/! Query Form
 				== Slim::Template.new('views/_query_tab.slim').render
 

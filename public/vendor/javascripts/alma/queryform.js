@@ -333,7 +333,7 @@ var queryForm = function (vov) {
 			$("#tabs").tabs({
 				disabled: [0]
 			});
-			$("#tabs").tabs('select', 1);
+			$("#tabs").tabs('select', 2);
 			$("#queryOverlay").overlay().close();
 
 			myself.postTableRenderFunction();
