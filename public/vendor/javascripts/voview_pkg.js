@@ -323,26 +323,29 @@ voview.prototype.selectNodes = function(inDoc, xpath) {
 };
 
 voview.prototype.getElementsByClass = function(searchClass, node, tag) {
+		
     var classElements = [];
     if (node === undefined) {
-        node = document;
+        // node = document;
+				node = $('#resultTableTab')[0] || $('#queryFormTab')[0]
     }
     if (tag === undefined) {
         tag = '*';
     }
-
+		
     var els = node.getElementsByTagName(tag);
+
     var elsLen = els.length;
     for ( var i = 0, j = 0; i < elsLen; i++) {
         var className = els[i].className;
         if( className ){
-        var classes = className.split(" ");
-            for( var k = 0; k < classes.length; k++){
-                if( classes[k] === searchClass ){
-                    classElements[j] = els[i];
-                    j++;
-                }
-            }
+       	 	var classes = className.split(" ");
+          for( var k = 0; k < classes.length; k++){
+              if( classes[k] === searchClass ){
+                  classElements[j] = els[i];
+                  j++;
+              }
+          }
         }
     }
     return classElements;
