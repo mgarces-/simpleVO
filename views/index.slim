@@ -40,17 +40,12 @@ html
 					li
 						a href="#queryFormTab" Query Form
 					li
-						a href="#adqlTab" ADQL Search
-					li
 						a href="#resultTableTab" Result Table
 					li
-						a href="#chartsTab" Charts
+						a href="#chartsTab" Statistics
 					
 				/! Query Form
 				== Slim::Template.new('views/_query_tab.slim').render
-
-				/! ADQL Form
-				== Slim::Template.new('views/_adql_tab.slim').render
 
 				/! Results Form
 				== Slim::Template.new('views/_results_tab.slim').render

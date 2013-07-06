@@ -140,7 +140,7 @@ function AsaQuery(rhUrl) {
 	 * and submit it.
 	 */
 	this.queryFormRequestDataSets = function (id_column_name, resultlist) {
-
+				
 		var form = document.createElement("form");
 
 		if(resultlist.length == 0){

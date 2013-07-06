@@ -327,6 +327,7 @@ voview.prototype.getElementsByClass = function(searchClass, node, tag) {
     var classElements = [];
     if (node === undefined) {
         // node = document;
+				// Modified because searching whole document is not necessary (I suppose...) and conflicts with other DOM's
 				node = $('#resultTableTab')[0] || $('#queryFormTab')[0]
     }
     if (tag === undefined) {

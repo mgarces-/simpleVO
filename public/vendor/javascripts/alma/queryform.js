@@ -41,7 +41,7 @@ var queryForm = function (vov) {
 	this.init = function () {
 		// Only the first tab is enabled
 		$("#tabs").tabs({
-			disabled: [2,3]
+			disabled: [1,2]
 		});
       
 		$(".inputdiv").mouseenter(function () {
@@ -279,7 +279,8 @@ var queryForm = function (vov) {
 
 			$("#queryOverlay").overlay().load();
 			// Keep the search screen under the overlay until the result page is 
-			// fully rendered. Then remove it and switch tabs               
+			// fully rendered. Then remove it and switch tabs
+			
 			myvov.renderObject.setUpdateCallback(function () {
 				myself.postQueryFormSubmission();
 			});
@@ -304,7 +305,6 @@ var queryForm = function (vov) {
 		*/
 		this.buildQueryUrl = function(queryForm) {
 			// alert('form: ' + $(queryForm).serialize());
-			console.log('form: ' + $(queryForm).serialize());		 
 			// jquery function returns all form elements and creates a name=value URL encoding
 			var values = $(queryForm).serializeArray();
 			var valuesArray = $.grep(
@@ -324,7 +324,6 @@ var queryForm = function (vov) {
 			var url = "search?" + stringParts.join("&");
 			url = url.replace(/\%/g, '*');
 			// alert('url: ' + url);
-			console.log(url)
 			return url;
 		};
    
@@ -333,7 +332,7 @@ var queryForm = function (vov) {
 			$("#tabs").tabs({
 				disabled: [0]
 			});
-			$("#tabs").tabs('select', 2);
+			$("#tabs").tabs('select', 1);
 			$("#queryOverlay").overlay().close();
 
 			myself.postTableRenderFunction();
@@ -369,35 +368,36 @@ var queryForm = function (vov) {
 		};
 
 		this.resultFormSubmit = function () {
-			// uses this.id_column_name
-			// This is the name of the column of which to obtain the values 
-			// to be delivered to the 
-			var columnnames = myvov.renderObject.getColumnNames();
-			var selectedrows = myvov.renderObject.getSelectedRows();
+		      // uses this.id_column_name
+		      // This is the name of the column of which to obtain the values 
+		      // to be delivered to the 
+		      var columnnames = myvov.renderObject.getColumnNames();
+		      var selectedrows = myvov.renderObject.getSelectedRows();
 
-			var idx = -1;
-			for (var k = 0; k < columnnames.length; k++) {
-				if (columnnames[k] == myself.id_column_name) {
-					idx = k;
-					break;
-				}
-			}
-			var resultlist = [];
-			for (var k = 0; k < selectedrows.length; k++) {
-				resultlist.push(myvov.filterObject.getRowValues(selectedrows[k])[idx]);
-			}
+		      var idx = -1;
+		      for (var k = 0; k < columnnames.length; k++) {
+		         if (columnnames[k] == myself.id_column_name) {
+		            idx = k;
+		            break;
+		         }
+		      }
+		      var resultlist = [];
+		      for (var k = 0; k < selectedrows.length; k++) {
+		         resultlist.push(myvov.filterObject.getRowValues(selectedrows[k])[idx]);
+		      }
 
-			// enable tab number three, no tab is disabled
-			$("#tabs").tabs({
-				disabled: []
-			});
-			$("#tabs").tabs('select', 1);
+		      // enable tab number three, no tab is disabled
+		      $("#tabs").tabs({
+		         disabled: []
+		      });
+		      $("#tabs").tabs('select', 1);
 
-			myself.resultFormSubmitCallback(myself.id_column_name, resultlist);
+		      myself.resultFormSubmitCallback(myself.id_column_name, resultlist);
 
-			// prevent standard behaviour (action) to take place
-			return false;
-		};
+		      // prevent standard behaviour (action) to take place
+		      return false;
+		   };
+	
    
    
 	};

@@ -17,4 +17,9 @@ use Rack::Coffee, {
   :output_path => '/public/javascripts/'
 }
 
+configure :development, :test do
+  VOApp.set :alma_endpoint   => 'https://almascience.nrao.edu/aq/search?',
+            :sesame_endpoint => 'http://cdsweb.u-strasbg.fr/cgi-bin/nph-sesame/-ox/SNV?'
+end
+
 run VOApp
