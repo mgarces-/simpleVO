@@ -941,6 +941,7 @@ voview.prototype.makeRenderer = function(rendererParams) {
         var allRowsSelected = false;
         var rowSelection = false;
         var updateCallback = null;
+				var totalFilteredRowsNum;
 
         // Default row range
         filterObject.setRowRange({ firstRow: 1, lastRow: 10 });
@@ -954,7 +955,9 @@ voview.prototype.makeRenderer = function(rendererParams) {
         function renderTable(_filteredDOM) {
             filteredDOM = _filteredDOM;
             meRenderer.setTitle(titleText);
-
+						
+						totalFilteredRowsNum = meRenderer.selectNodes(filteredDOM, "//*[local-name()='PARAM'][@ID='VOV:FilterCount']")[0].getAttribute('value');
+						
             var fields = meRenderer.selectNodes(filteredDOM, "//*[local-name()='FIELD']");
             fieldNames = [];
             fieldUCD = [];
@@ -1697,6 +1700,18 @@ voview.prototype.makeRenderer = function(rendererParams) {
             return fieldNames;
         };
         
+        /**
+         * Return the total number of filtered rows of VOTable
+         * 
+         * @returns {Int} The number of filtered rows.
+         *          
+         */
+        this.getFilteredRowsNum = function() {
+            return totalFilteredRowsNum;
+        };
+				
+				
+				
         /**
          * Set function that gets called whenever the display is updated.
          * 

@@ -48,7 +48,7 @@ function AsaQuery(rhUrl) {
 		});
 		voView.renderObject.enableRowSelection();
 		voView.renderObject.setTitle("");
-
+		
 		// queryForm
 		var qform = new queryForm(voView);
 		qform.setIdColumnName("ASDM_UID");

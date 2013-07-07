@@ -32,14 +32,19 @@ div.inputdiv {margin: 2px;}
 /* the main table looks like offset horizontally because of the border-spacing. This offset is compensated here. */
 .maintable                   {padding-left: 0px; margin-left: -8px;}
 
-.buttonclass                 {margin: auto; text-align: left; padding-bottom: 6px; padding-top: 4px;}         
-.buttonclass input           {background: none; border: 1px solid #888888; color: #000000; cursor: pointer;}         
-.buttonclass input:hover     {background-color: #fdf5ce;}
+.buttonclass                 					{margin: auto; text-align: left; padding-bottom: 6px; padding-top: 4px;}         
+.buttonclass input,button           	{background: none; border: 1px solid #888888; color: #000000; cursor: pointer;}         
+.buttonclass input:hover,button:hover {background-color: #fdf5ce;}
+.buttonclass select {margin-top: 5px; text-size:18px;}
+
+
+
 
 /* need this to float the divs inside without overlapping with subsequent divs */
 #controls {width: 100%; overflow: auto}
 #controls .buttonclass {float: left}
 #controls #radiobuttons {float: left}
+
 
 .titleclass                  {font-size: x-large; font-weight: 900; color: #4179B4; margin-top: 10px; margin-bottom: 10px;}
 
