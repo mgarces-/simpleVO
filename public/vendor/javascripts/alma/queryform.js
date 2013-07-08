@@ -352,11 +352,15 @@ var queryForm = function (vov) {
 				return "<div><h2>Help</H2>You can:<br><ul><li>change the <b>sorting</b> by clicking on the column headers of the data table <li>change the <b>order</b> of the columns by draging & dropping the column headers or the rows in the column table on the left.<li><b>add</b> or <b>remove</b> columns to be displayed by dragging&dropping columns above or below the red bar (or the red bar itself)<li><b>filter</b> the search results </ul></div>" + oldhtml;
 			});
 			
-			// Charts Rendering
+			// Fill Select in Chart Section
+			$.each(myvov.renderObject.getColumnNames(),function(index,column){
+				$('#plot-x').append($('<option>', {
+				    value: index,
+				    text: column
+				}));
+			});
 			
 			
-			
-
 		};
 
 		this.resetInputFields = function () {
@@ -404,15 +408,5 @@ var queryForm = function (vov) {
 		      // prevent standard behaviour (action) to take place
 		      return false;
 		   };
-	
-		this.getPlottableData = function(){
-			console.log('The idea is to load charts here:');
-			var row_num = myvov.renderObject.getFilteredRowsNum();
-			console.log('Total Row num: '+ row_num);
-			console.log('Columns: ' + myvov.renderObject.getColumnNames());
-			for (var i = 1; i <= row_num; i++) {
-				console.log('Rows[' + i + ']: ' + myvov.filterObject.getRowValues(i));
-			}
-		}
    
 	};

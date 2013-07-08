@@ -51,13 +51,14 @@ function AsaQuery(rhUrl) {
 		
 		// queryForm
 		var qform = new queryForm(voView);
+		
 		qform.setIdColumnName("ASDM_UID");
 		qform.resetInputFieldsCallback = this.resetQueryFormInputFields;
 		qform.initCallBack = this.queryFormPostInitCallback;
 		qform.resultFormSubmitCallback = this.queryFormRequestDataSets;
 		qform.resolverCallBack = this.queryFormResolverCallback;
 		qform.init();
-		
+	
 		$("#source_name_sesame").keydown(function() {      
 			qform.resolverKeyPressed($(this), "proxySesame", 750);
 		});
@@ -84,6 +85,11 @@ function AsaQuery(rhUrl) {
 		});
 		// set the initial state
 		myself.restoreVoViewState("asdm");
+		
+		
+		// Preload Charts and Event Handlers
+		myself.initChartsHandler();
+		
 	};
 	
 	/*
@@ -345,5 +351,73 @@ function AsaQuery(rhUrl) {
 		}
 	};
 
+	// 
+	// Charts Rendering
+	// 
+	
+	this.initChartsHandler = function(){
+		
+		var plot_options = {
+		    chart: {
+		        renderTo: 'chartsContainer',
+		        defaultSeriesType: 'column'
+		    },
+				// tooltip: {
+				// 	shared: false,
+				// 	formatter: function() {
+				// 		var serie = this.series;
+				// 		var s = '<span style="color:' + serie.color + '">' + serie.options.name + '</span>: <b>' + this.y + '</b><br/>';
+				// 		$.each(serie.options.asdm_id, function(name, value) {
+				// 		    s += '<b>' + name + ':</b> ' + value + '<br>';
+				// 		});
+				// 		return s;
+				// },
+				series: []
+		};
+
+
+		$("#plot-x").change(function(){
+			
+			var votable_rows_num = voView.renderObject.getFilteredRowsNum();
+			
+			var votable_categories = voView.renderObject.getColumnNames(),
+					selected_category_index = $("#plot-x :selected").val();
+
+
+			var	plot_options_index = -1;
+					
+			var data_row, //used to obtain plotta
+					previous_source_name,
+					current_source_name;
+			
+
+			plot_options.series=[];
+					
+			for (var i = 1; i <= votable_rows_num; i++) {
+				data_row = voView.filterObject.getRowValues(i);
+
+				// get SOURCE_NAME value
+				current_source_name = data_row[1]; 
+				
+				if(i == 1 || current_source_name != last_source_name){					
+					plot_options.series.push({
+						name: current_source_name, 
+						data: [data_row[selected_category_index]]
+					});
+					
+					last_source_name = current_source_name; 
+					plot_options_index+=1;
+				}else if (current_source_name == last_source_name){
+					plot_options.series[plot_options_index]
+						.data.push(data_row[selected_category_index])
+				}
+			}
+			console.log(plot_options.series);
+			var chart = new Highcharts.Chart(plot_options);    
+		});
+		
+	}
+
+	
 };
 

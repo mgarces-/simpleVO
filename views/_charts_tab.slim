@@ -1,42 +1,8 @@
 #chartsTab
-	
-	#controls
-	.buttonclass
-		| X-Axis:
-		select id="plot-x"
-			option value="1" A 
-			option value="2" B
-		| Y-Axis:
-		select id="plot-y"
-			option value="1" A
-			option value="2" B
-		button id="plot_btn" Plot
-		/ .buttonclass
-		/ 	button id="plot_btn" Change Data Source
+	| Column:
+	select id="plot-x"
+	/ | Y-Axis:
+	/	select id="plot-y"
+	/ 	option value="1" A
 
 	#chartsContainer style="min-width: 400px; height: 400px; margin: 0 auto"
-
-	
-javascript:
-	$(function () {
-	
-		var plot_options = {
-		    chart: {
-		        renderTo: 'chartsContainer',
-		        defaultSeriesType: 'column'
-		    },
-		    series: []
-		};
-
-		$("#plot_btn").click(function(){
-			if ($("#plot-x").val() == "1")
-			{
-			    plot_options.series = [{name: 'A', data: [1,2,3,2,1]}]
-			}
-			else if ($("#plot-x").val() == "2")
-			{
-			    plot_options.series = [{name: 'A', data: [1,2,3,2,1]},{name: 'B', data: [3,2,1,2,3]}]
-			}
-			var chart = new Highcharts.Chart(plot_options);    
-		});
-	});
