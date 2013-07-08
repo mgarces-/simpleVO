@@ -278,6 +278,7 @@ var queryForm = function (vov) {
 			queryForm['query_string'].value = queryUrl;
 			//alert(thisfield['query_string'].value);
 
+			$("#queryOverlay>p").text('Searching');
 			$("#queryOverlay").overlay().load();
 			// Keep the search screen under the overlay until the result page is 
 			// fully rendered. Then remove it and switch tabs
@@ -341,7 +342,12 @@ var queryForm = function (vov) {
 			myvov.renderObject.setUpdateCallback(function () {
 				myself.postTableRenderFunction();
 			});
+			
+			
+			
 		};
+
+		this.postTableRenderCallback = function(){}
 
 		this.postTableRenderFunction = function () {
 			// adding the Help text
@@ -353,15 +359,19 @@ var queryForm = function (vov) {
 			});
 			
 			// Fill Select in Chart Section
-			$.each(myvov.renderObject.getColumnNames(),function(index,column){
-				$('#plot-x').append($('<option>', {
-				    value: index,
-				    text: column
-				}));
-			});
+			if( $('#plot-x').has('option').length == 0 ) {
+				$.each(myvov.renderObject.getColumnNames(),function(index,column){
+					$('#plot-x').append($('<option>', {
+					    value: index,
+					    text: column
+					}));
+				});
+			}			
 			
-			
+			myself.postTableRenderCallback();
 		};
+
+
 
 		this.resetInputFields = function () {
 			// function that resets all fields to default values
