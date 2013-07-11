@@ -1,6 +1,18 @@
+function PlotUtils(){
+	this.degrees2HSM = function(degrees){
+	    var deg = degrees | 0; 
+	    var frac = Math.abs(degrees - deg);
+	    var min = (frac * 60) | 0; 
+	    var sec = Math.round(frac * 3600 - min * 60);
+	    return deg + ":" + min + ":" + sec + "";
+	}	
+}
+
+
 function ChartsHandler(voView){
-	var plot_config;
+	var plotUtils = new PlotUtils();
 	var $this = this;
+	var plot_config;	
 	
 	this.init = function(){			
 		plot_config = {
@@ -23,7 +35,7 @@ function ChartsHandler(voView){
 			$('#chart_select').append($('<option>', plot_options[i]));
 		}
 
-	
+		$("#chart_select")[0].selectedIndex = -1;
 		$("#chart_select").change(function(){
 			var selected_category = $("#chart_select :selected").val();
 
@@ -55,37 +67,52 @@ function ChartsHandler(voView){
 	
 		return data;
 	}
-	
+		
 	this.radecPlot = function(){
 		// RA = 2, DEC = 3
+		
+		plot_config.chart = {
+			renderTo: 'chartsContainer',
+			type: 'scatter',
+			zoomType: 'xy'
+		};
+		
+		plot_config.title = {
+			text: "Observations in RA/DEC"
+		}
 		
 		plot_config.xAxis = {
 			title: {
 				enable: true,
 				text: 'Ra'
 			},
-			type: 'datetime',
-			labels: {
-				formatter: function() {
-					return Highcharts.dateFormat('%H:%M:%S', this.value);
-			  }
-			},
 			startOnTick: true,
 			endOnTick: true,
-			showOnLabel: true
+			showOnLabel: true,
+			type: 'datetime',
+			dateTimeLabelFormats: {
+				hour: '%H:%M:%S',
+				minutes: '%H:%M:%S',
+				seconds: '%H:%M:%S'
+			}
 		};
 		
 		plot_config.yAxis = {
 			title: {
 				text: 'Dec'
-			},
-			type: 'datetime',
-			labels: {
-				formatter: function() {
-					return Highcharts.dateFormat('%H:%M:%S', this.value);
-			  }
 			}
 		};
+		
+		plot_config.legend = {
+			layout: 'vertical',
+			align: 'left',
+			verticalAlign: 'top',
+			x: 100,
+			y: 70,
+			floating: true,
+			backgroundColor: '#FFFFFF',
+			borderWidth: 1
+	  };
 		
 		plot_config.plotOptions = {
 			scatter: {
@@ -106,11 +133,11 @@ function ChartsHandler(voView){
 					}
 				},
 				tooltip: {
-					headerFormat: '<b>{series.name}</b><br>',
-					pointFormat: '{point.x} RA, {point.y} DEC'
+					headerFormat: '<b>Source Name: {series.name}</b><br>',
+					pointFormat: '{point.x} [RA], {point.y} [DEC]'
 				}
 			}
-		}
+		};
 		
 				
 		var data_length = voView.renderObject.getFilteredRowsNum();
@@ -145,10 +172,78 @@ function ChartsHandler(voView){
 	}
 
 	this.bandsPlot = function (){
+		plot_config = {};
 		
+		plot_config.chart = {			
+			renderTo: 'chartsContainer',
+			plotBackgroundColor: null,
+			plotBorderWidth: null,
+			plotShadow: false
+		};
+		
+		plot_config.title = {
+			text: 'Percentage of Band Usage'
+		};
+		plot_config.tooltip = {
+			pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+		};
+		
+		plot_config.plotOptions = {
+	    pie: {
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+            enabled: true,
+            color: '#000000',
+            connectorColor: '#000000',
+            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+        }
+	    }
+		};
+		
+		plot_config.series = [{
+      type: 'pie',
+      name: 'Percentage of Searched Observations',
+		}];
+		
+		var percentage_per_band = [
+			0.0, //Band 1
+			0.0, //Band 2
+			0.0, //Band 3
+			0.0, //Band 4
+			0.0, //Band 5
+			0.0, //Band 6
+			0.0, //Band 7
+			0.0, //Band 8
+			0.0, //Band 9
+			0.0, //Band 10
+		];
+		
+		var total_filtered_observations = voView.renderObject.getFilteredRowsNum();
+
+		for (var i = 1; i <= total_filtered_observations; i++) {
+			data_row = $this.formatData(voView.filterObject.getRowValues(i));
+			
+			//update occurence freq.
+			percentage_per_band[data_row[4]] += 1/total_filtered_observations; 
+		}
+
+		plot_config.series[0].data = [
+			['Band 1',percentage_per_band[0]],
+			['Band 2',percentage_per_band[1]],
+			['Band 3',percentage_per_band[2]],
+			['Band 4',percentage_per_band[3]],
+			['Band 5',percentage_per_band[4]],
+			['Band 6',percentage_per_band[5]],
+			['Band 7',percentage_per_band[6]],
+			['Band 8',percentage_per_band[7]],
+			['Band 9',percentage_per_band[8]],
+			['Band 10',percentage_per_band[9]]
+		];
+		
+		console.log(plot_config.series[0].data);
 		
 	}
-
 
 	this.renderChart = function(chart_generator){
 		$("#queryOverlay>p").text('loading');
@@ -158,9 +253,12 @@ function ChartsHandler(voView){
 		plot_config.series=[];
 		
 		chart_generator();
-		
+		console.log(plot_config);
 		var chart = new Highcharts.Chart(plot_config);
 		$("#queryOverlay").overlay().close();
 	}	
 }
+
+
+
 
