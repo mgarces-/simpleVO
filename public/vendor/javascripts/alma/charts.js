@@ -5,7 +5,26 @@ function PlotUtils(){
 	    var min = (frac * 60) | 0; 
 	    var sec = Math.round(frac * 3600 - min * 60);
 	    return deg + ":" + min + ":" + sec + "";
-	}	
+	}
+	
+	this.getVOTableRowValues = function(index,voTableRows){
+		var rows = $('TD',voTableRows[index]);
+		var rows = $(rows);
+		
+		var row_values = [];
+		
+		for(var i=0;i<rows.length;i++){
+			var row = $(rows[i]);
+			
+			if(row.attr('val'))
+				row_values.push(parseFloat(row.attr('val')));
+			else
+				row_values.push(row.text());
+		}
+
+		return row_values;
+	}
+	
 }
 
 
@@ -13,6 +32,8 @@ function ChartsHandler(voView){
 	var plotUtils = new PlotUtils();
 	var self = this;
 	var last_rendered = null;
+	var voTableRows = null;
+	
 	
 	this.init = function(){			
 		
@@ -43,47 +64,122 @@ function ChartsHandler(voView){
 	}
 
 	this.voViewUpdatehandler = function(voTableDOM){
+		$("#queryOverlay>p").text('loading');
+		$("#queryOverlay").overlay().load();
 		
-		console.log('[LOG] voViewUpdatehandler:')
-		console.log(voTableDOM);
 		
+		// refresh data from VOView		
+		voTableRows = $('TABLEDATA TR',voTableDOM);
+		
+		test = voTableRows;
+		
+		// render (re-render) chart
+		self.renderChart();
+		
+		// read Data, store it somewhere and change getRowValues to some procedure that parse this voTable
+		$("#queryOverlay").overlay().close();
 	}
 
 
-	this.parseVOTableDOM = function(voTableDOM){
-		var columns_length = voView.renderObject.getColumnNames().length;
-		var columns = voTableDOM.getElementsByTagName("TD");
-		var values = [[]];
-		
-		row_index = 0;
-		
-		
-		return values;
+	// router to charts
+	this.renderChart = function(){
+		if(arguments.length == 0 && last_rendered != null) last_rendered[0]();
+		if(arguments.length == 1) arguments[0]();
 	}
-
-
-	this.formatData = function(data){
 	
-		//data[0] = data[0]; //Project Code (String)
-		//data[1] = data[1]; // Source Name (String)
-		data[2] = parseFloat(data[2]); // Ra (Float)
-		data[3] = parseFloat(data[3]); // Dec (Float)
-		data[4] = parseInt(data[4]); // Band (Int)
-		data[5] = parseFloat(data[5]);  //Integration (Float)
-		data[6] = new Date(data[6]); // Release Date (Datetime)
-		data[7] = parseFloat(data[7]); //	Vel. Resolution (Float)
-	  //date[8] = date[8]; // Pol. Products (String)
-		//data[9] = new Date(data[9]); // Start Date (Datetime)
-		//date[10] = date[10]; // PI_NAME (String)
-		data[11] = parseFloat(data[11]); // PWV (Float)
-		//data[12] = data[12]  //ASDM_UID (String)
-		//data[13] = data[13]  //TITLE (String)
-		//data[14] = data[14]  //TYPE (String)
-		//data[15] = data[15]  //SCAN_INTENT (String)
 	
-		return data;
+	// ********************
+	// Charts Construction
+	// ====================
+
+	this.radecPlot = function(){
+		var plot_config = self.radecConfig();
+		
+		var series_index = -1;
+		
+		var row, 
+				previous_source_name,
+				current_source_name;
+		
+		
+		for (var i = 0; i < voTableRows.length; i++) {
+			row = plotUtils.getVOTableRowValues(i,voTableRows);
+
+			current_source_name = row[1]; 
+			if(i == 0 || current_source_name != last_source_name){					
+				plot_config.series.push({
+					name: current_source_name, 
+					data: [[row[2],row[3]]]
+				});
+
+				last_source_name = current_source_name; 
+				series_index+=1;
+			}else if (current_source_name == last_source_name){
+				plot_config.series[series_index]
+					.data.push([row[2],row[3]])
+			}
+
+		}
+
+		console.log(plot_config.series);
+
+		last_rendered = this;
+		new Highcharts.Chart(plot_config);
+	
+		
 	}
 
+	
+
+	this.bandsPlot = function (){	
+		
+		var plot_config = self.bandsConfig();
+
+		var percentage_per_band = [
+			0.0, //Band 1
+			0.0, //Band 2
+			0.0, //Band 3
+			0.0, //Band 4
+			0.0, //Band 5
+			0.0, //Band 6
+			0.0, //Band 7
+			0.0, //Band 8
+			0.0, //Band 9
+			0.0, //Band 10
+		];
+		
+		for (var i = 0; i < voTableRows.length; i++) {
+			row = plotUtils.getVOTableRowValues(i,voTableRows);
+		
+			//update occurence freq.
+			percentage_per_band[row[4]-1] += 1/(i+1); 
+		}
+		
+		console.log(percentage_per_band);
+
+		// uncommented only Bands offered now by ALMA (also the available ones in the Form)
+		plot_config.series[0].data = [
+			// ['Band 1',percentage_per_band[0]],
+			// ['Band 2',percentage_per_band[1]],
+			['Band 3',percentage_per_band[2]],
+			// ['Band 4',percentage_per_band[3]],
+			// ['Band 5',percentage_per_band[4]],
+			['Band 6',percentage_per_band[5]],
+			['Band 7',percentage_per_band[6]],
+			// ['Band 8',percentage_per_band[7]],
+			['Band 9',percentage_per_band[8]],
+			// ['Band 10',percentage_per_band[9]]
+		];
+	
+		last_rendered = this;
+		new Highcharts.Chart(plot_config);
+	}
+
+
+
+	// ********************
+	// Charts Configuration
+	// ====================
 
 	this.radecConfig = function(){
 		return {
@@ -153,44 +249,6 @@ function ChartsHandler(voView){
 		};
 	}
 
-	this.radecPlot = function(){
-		// RA = 2, DEC = 3
-		var plot_config = self.radecConfig();
-
-		var data_length = voView.renderObject.getFilteredRowsNum();
-		var data_categories = voView.renderObject.getColumnNames();
-		
-		var	series_index = -1;
-			
-		var data_row, 
-				previous_source_name,
-				current_source_name;
-			
-		
-		for (var i = 1; i <= data_length; i++) {
-			data_row = self.formatData(voView.filterObject.getRowValues(i));
-			
-			current_source_name = data_row[1]; 
-			if(i == 1 || current_source_name != last_source_name){					
-				plot_config.series.push({
-					name: current_source_name, 
-					data: [[data_row[2],data_row[3]]]
-				});
-			
-				last_source_name = current_source_name; 
-				series_index+=1;
-			}else if (current_source_name == last_source_name){
-				plot_config.series[series_index]
-					.data.push([data_row[2],data_row[3]])
-			}
-			
-		}
-		
-		
-		last_rendered = this;
-		new Highcharts.Chart(plot_config);
-	}
-
 	this.bandsConfig = function(){
 		return {
 			chart: {			
@@ -224,79 +282,4 @@ function ChartsHandler(voView){
 		};
 	}
 
-	this.bandsPlot = function (){	
-		
-		var plot_config = self.bandsConfig();
-
-		var percentage_per_band = [
-			0.0, //Band 1
-			0.0, //Band 2
-			0.0, //Band 3
-			0.0, //Band 4
-			0.0, //Band 5
-			0.0, //Band 6
-			0.0, //Band 7
-			0.0, //Band 8
-			0.0, //Band 9
-			0.0, //Band 10
-		];
-		
-		var total_filtered_observations = voView.renderObject.getFilteredRowsNum();
-
-		for (var i = 1; i <= total_filtered_observations; i++) {
-			data_row = self.formatData(voView.filterObject.getRowValues(i));
-			console.log('data_row['+i+'] = '+data_row[4])
-			
-			console.log('percentage_per_band index = ' + voView.filterObject.getRowValues(i)[4]);
-			//update occurence freq.
-			percentage_per_band[data_row[4]-1] += 1/total_filtered_observations; 
-		}
-		
-		console.log(percentage_per_band);
-
-		plot_config.series[0].data = [
-			['Band 1',percentage_per_band[0]],
-			['Band 2',percentage_per_band[1]],
-			['Band 3',percentage_per_band[2]],
-			['Band 4',percentage_per_band[3]],
-			['Band 5',percentage_per_band[4]],
-			['Band 6',percentage_per_band[5]],
-			['Band 7',percentage_per_band[6]],
-			['Band 8',percentage_per_band[7]],
-			['Band 9',percentage_per_band[8]],
-			['Band 10',percentage_per_band[9]]
-		];
-	
-		last_rendered = this;
-		new Highcharts.Chart(plot_config);
-	}
-
-	this.renderChart = function(){
-		$("#queryOverlay>p").text('loading');
-		$("#queryOverlay").overlay().load();
-
-		console.log(arguments.length);
-		console.log(last_rendered);
-
-		if(arguments.length == 0 && last_rendered != null){
-			last_rendered[0]();
-			console.log('[LOG] executing last rendered function');
-		}
-
-		if(arguments.length == 1) {
-			console.log('[LOG] executing function:');
-			arguments[0]();
-		}
-			
-
-	
-		$("#queryOverlay").overlay().close();
-	}
-	
-	
-	
-}
-
-
-
-
+};
