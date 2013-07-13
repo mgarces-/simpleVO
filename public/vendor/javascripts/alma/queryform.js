@@ -347,7 +347,7 @@ var queryForm = function (vov) {
 			
 		};
 
-		this.postTableRenderCallback = function(){}
+		this.postTableRenderCallback = function(){};
 
 		this.postTableRenderFunction = function () {
 			// adding the Help text
@@ -358,7 +358,7 @@ var queryForm = function (vov) {
 				return "<div><h2>Help</H2>You can:<br><ul><li>change the <b>sorting</b> by clicking on the column headers of the data table <li>change the <b>order</b> of the columns by draging & dropping the column headers or the rows in the column table on the left.<li><b>add</b> or <b>remove</b> columns to be displayed by dragging&dropping columns above or below the red bar (or the red bar itself)<li><b>filter</b> the search results </ul></div>" + oldhtml;
 			});
 			
-			// myself.postTableRenderCallback();
+			myself.postTableRenderCallback();
 		};
 
 

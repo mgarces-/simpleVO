@@ -11,17 +11,13 @@ function PlotUtils(){
 
 function ChartsHandler(voView){
 	var plotUtils = new PlotUtils();
-	var $this = this;
-	var plot_config;	
+	var self = this;
+	var last_rendered = null;
 	
 	this.init = function(){			
-		plot_config = {
-	    chart: {
-	        renderTo: 'chartsContainer'
-	    },
-			series: []
-		};
-	
+		
+		voView.filterObject.postFilterCallback = self.voViewUpdatehandler;
+		
 		// Fill Select in Chart Section
 		plot_options = [{
 	    value: 1,
@@ -40,11 +36,31 @@ function ChartsHandler(voView){
 			var selected_category = $("#chart_select :selected").val();
 
 			// RA/DEC Scatter Plot
-			if(selected_category == 1) $this.renderChart($this.bandsPlot);
+			if(selected_category == 1) self.renderChart(self.bandsPlot);
 			// Band Usage Circle Plot
-			if(selected_category == 2) $this.renderChart($this.radecPlot);
+			if(selected_category == 2) self.renderChart(self.radecPlot);
 		});
 	}
+
+	this.voViewUpdatehandler = function(voTableDOM){
+		
+		console.log('[LOG] voViewUpdatehandler:')
+		console.log(voTableDOM);
+		
+	}
+
+
+	this.parseVOTableDOM = function(voTableDOM){
+		var columns_length = voView.renderObject.getColumnNames().length;
+		var columns = voTableDOM.getElementsByTagName("TD");
+		var values = [[]];
+		
+		row_index = 0;
+		
+		
+		return values;
+	}
+
 
 	this.formatData = function(data){
 	
@@ -67,79 +83,80 @@ function ChartsHandler(voView){
 	
 		return data;
 	}
-		
-	this.radecPlot = function(){
-		// RA = 2, DEC = 3
-		
-		plot_config.chart = {
-			renderTo: 'chartsContainer',
-			type: 'scatter',
-			zoomType: 'xy'
-		};
-		
-		plot_config.title = {
-			text: "Observations in RA/DEC"
-		}
-		
-		plot_config.xAxis = {
-			title: {
-				enable: true,
-				text: 'Ra'
+
+
+	this.radecConfig = function(){
+		return {
+			chart: {
+				renderTo: 'chartsContainer',
+				type: 'scatter',
+				zoomType: 'xy'
 			},
-			startOnTick: true,
-			endOnTick: true,
-			showOnLabel: true,
-			type: 'datetime',
-			dateTimeLabelFormats: {
-				hour: '%H:%M:%S',
-				minutes: '%H:%M:%S',
-				seconds: '%H:%M:%S'
-			}
-		};
-		
-		plot_config.yAxis = {
 			title: {
-				text: 'Dec'
-			}
-		};
-		
-		plot_config.legend = {
-			layout: 'vertical',
-			align: 'left',
-			verticalAlign: 'top',
-			x: 100,
-			y: 70,
-			floating: true,
-			backgroundColor: '#FFFFFF',
-			borderWidth: 1
-	  };
-		
-		plot_config.plotOptions = {
-			scatter: {
-				marker: {
-					radius: 5,
+				text: "Observations in RA/DEC"
+			},
+			xAxis: {
+				title: {
+					enable: true,
+					text: 'Ra'
+				},
+				startOnTick: true,
+				endOnTick: true,
+				showOnLabel: true,
+				type: 'datetime',
+				dateTimeLabelFormats: {
+					hour: '%H:%M:%S',
+					minutes: '%H:%M:%S',
+					seconds: '%H:%M:%S'
+				}
+			},
+			yAxis: {
+				title: {
+					text: 'Dec'
+				}
+			},
+			legend: {
+				layout: 'vertical',
+				align: 'left',
+				verticalAlign: 'top',
+				x: 100,
+				y: 70,
+				floating: true,
+				backgroundColor: '#FFFFFF',
+				borderWidth: 1
+			},
+			plotOptions: {
+				scatter: {
+					marker: {
+						radius: 5,
+						states: {
+							hover: {
+								enabled: true,
+								lineColor: 'rgb(100,100,100)'
+							}
+						}
+					},
 					states: {
 						hover: {
-							enabled: true,
-							lineColor: 'rgb(100,100,100)'
+							marker: {
+								enabled: false
+							}
 						}
+					},
+					tooltip: {
+						headerFormat: '<b>Source Name: {series.name}</b><br>',
+						pointFormat: '{point.x} [RA], {point.y} [DEC]'
 					}
-				},
-				states: {
-					hover: {
-						marker: {
-							enabled: false
-						}
-					}
-				},
-				tooltip: {
-					headerFormat: '<b>Source Name: {series.name}</b><br>',
-					pointFormat: '{point.x} [RA], {point.y} [DEC]'
 				}
-			}
+			},
+			series: []
 		};
-		
-				
+	}
+
+	this.radecPlot = function(){
+		// RA = 2, DEC = 3
+		var plot_config = self.radecConfig();
+
 		var data_length = voView.renderObject.getFilteredRowsNum();
 		var data_categories = voView.renderObject.getColumnNames();
 		
@@ -151,7 +168,7 @@ function ChartsHandler(voView){
 			
 		
 		for (var i = 1; i <= data_length; i++) {
-			data_row = $this.formatData(voView.filterObject.getRowValues(i));
+			data_row = self.formatData(voView.filterObject.getRowValues(i));
 			
 			current_source_name = data_row[1]; 
 			if(i == 1 || current_source_name != last_source_name){					
@@ -169,43 +186,48 @@ function ChartsHandler(voView){
 			
 		}
 		
+		
+		last_rendered = this;
+		new Highcharts.Chart(plot_config);
 	}
 
-	this.bandsPlot = function (){
-		plot_config = {};
-		
-		plot_config.chart = {			
-			renderTo: 'chartsContainer',
-			plotBackgroundColor: null,
-			plotBorderWidth: null,
-			plotShadow: false
+	this.bandsConfig = function(){
+		return {
+			chart: {			
+				renderTo: 'chartsContainer',
+				plotBackgroundColor: null,
+				plotBorderWidth: null,
+				plotShadow: false
+			},
+			title: {
+				text: 'Percentage of Band Usage'
+			},
+			tooltip: {
+				pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+			},
+			plotOptions: {
+		    pie: {
+	        allowPointSelect: true,
+	        cursor: 'pointer',
+	        dataLabels: {
+	          enabled: true,
+	          color: '#000000',
+	          connectorColor: '#000000',
+	          format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+	        }
+		    }
+			},
+			series: [{
+	      type: 'pie',
+	      name: 'Percentage of Searched Observations',
+			}]
 		};
+	}
+
+	this.bandsPlot = function (){	
 		
-		plot_config.title = {
-			text: 'Percentage of Band Usage'
-		};
-		plot_config.tooltip = {
-			pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-		};
-		
-		plot_config.plotOptions = {
-	    pie: {
-        allowPointSelect: true,
-        cursor: 'pointer',
-        dataLabels: {
-            enabled: true,
-            color: '#000000',
-            connectorColor: '#000000',
-            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-        }
-	    }
-		};
-		
-		plot_config.series = [{
-      type: 'pie',
-      name: 'Percentage of Searched Observations',
-		}];
-		
+		var plot_config = self.bandsConfig();
+
 		var percentage_per_band = [
 			0.0, //Band 1
 			0.0, //Band 2
@@ -222,11 +244,15 @@ function ChartsHandler(voView){
 		var total_filtered_observations = voView.renderObject.getFilteredRowsNum();
 
 		for (var i = 1; i <= total_filtered_observations; i++) {
-			data_row = $this.formatData(voView.filterObject.getRowValues(i));
+			data_row = self.formatData(voView.filterObject.getRowValues(i));
+			console.log('data_row['+i+'] = '+data_row[4])
 			
+			console.log('percentage_per_band index = ' + voView.filterObject.getRowValues(i)[4]);
 			//update occurence freq.
-			percentage_per_band[data_row[4]] += 1/total_filtered_observations; 
+			percentage_per_band[data_row[4]-1] += 1/total_filtered_observations; 
 		}
+		
+		console.log(percentage_per_band);
 
 		plot_config.series[0].data = [
 			['Band 1',percentage_per_band[0]],
@@ -240,23 +266,35 @@ function ChartsHandler(voView){
 			['Band 9',percentage_per_band[8]],
 			['Band 10',percentage_per_band[9]]
 		];
-		
-		console.log(plot_config.series[0].data);
-		
+	
+		last_rendered = this;
+		new Highcharts.Chart(plot_config);
 	}
 
-	this.renderChart = function(chart_generator){
+	this.renderChart = function(){
 		$("#queryOverlay>p").text('loading');
 		$("#queryOverlay").overlay().load();
 
-		// clean old data of chartContainer
-		plot_config.series=[];
-		
-		chart_generator();
-		console.log(plot_config);
-		var chart = new Highcharts.Chart(plot_config);
+		console.log(arguments.length);
+		console.log(last_rendered);
+
+		if(arguments.length == 0 && last_rendered != null){
+			last_rendered[0]();
+			console.log('[LOG] executing last rendered function');
+		}
+
+		if(arguments.length == 1) {
+			console.log('[LOG] executing function:');
+			arguments[0]();
+		}
+			
+
+	
 		$("#queryOverlay").overlay().close();
-	}	
+	}
+	
+	
+	
 }
 
 

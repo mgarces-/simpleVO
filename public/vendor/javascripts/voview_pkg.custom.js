@@ -636,6 +636,7 @@ voview.prototype.makeFilter = function(filterParams) {
                     preProcessor.importStylesheet(preProcDOM);
                     tempDOM = preProcessor.transformToDocument(votableDOM);
                     votableDOM = tempDOM;
+										
                 } catch (e1) {
                     alert("VOView: Error preprocessing XML doc: " + e1.message);
                 }
@@ -647,6 +648,7 @@ voview.prototype.makeFilter = function(filterParams) {
             var xmlstring;
             // alert("ready called filterDOM = "+filterDOM+", preProcDOM =
             // "+preProcDOM);
+												
             if (filterDOM !== null && preProcDOM !== null) {
                 // Do the actual filtering work and call back with the result.
                 preprocess();
@@ -701,6 +703,13 @@ voview.prototype.makeFilter = function(filterParams) {
                                 filterProc.setParameter(null, "selectAllCriteria", selectCriteria);
                             }
                             filteredTableDOM = filterProc.transformToDocument(votableDOM);
+														
+														// filteredTableDOM without value range (used for secondary tools)
+														filterProc.setParameter(null,"pageStart",0);
+														filterProc.setParameter(null,"pageEnd",Number.POSITIVE_INFINITY);
+														
+														var filteredTableDOMWithoutRange = filterProc.transformToDocument(votableDOM);
+														
                         } catch (e2) {
                             alert("VOView: Error processing votable DOM thru Filter: " + e2.message);
                         }
@@ -710,8 +719,12 @@ voview.prototype.makeFilter = function(filterParams) {
                 }
 
                 resultCallback(filteredTableDOM);
+								
+								// External Functions 
+								meFilter.postFilterCallback(filteredTableDOMWithoutRange);
             }
         }
+				
 
         /**
          * Produces a single page's worth of VOTABLE data. After filtering is
@@ -723,6 +736,8 @@ voview.prototype.makeFilter = function(filterParams) {
          *            VOTABLE. If omitted then use function specified in
          *            constructor.
          */
+				
+				
         this.doFilter = function(filterParams) {
             var filterDOMCallback = function(data) {
                 filterDOM = data;
@@ -758,7 +773,10 @@ voview.prototype.makeFilter = function(filterParams) {
                 }
             }
             ready();
+				
         };
+
+
 
         /**
          * Set column value filters on the VOTABLE. Any filters all ready set on
@@ -879,11 +897,12 @@ voview.prototype.makeFilter = function(filterParams) {
 
                 rowProcessor.importStylesheet(rowProcDOM);
             }
-            
+
             rowProcessor.setParameter(null, "rowNumber", rowNumber);
             var rowDom = rowProcessor.transformToDocument(votableDOM);
             var columns = rowDom.getElementsByTagName("TD");
             var values = [];
+						
             for(var icol=0; icol<columns.length; icol++){
                 var column = columns[icol];
                 if( column.hasChildNodes() ){
@@ -895,11 +914,14 @@ voview.prototype.makeFilter = function(filterParams) {
             
             return values;
         }; 
+				
+				this.postFilterCallback = function(filteredTableDOM){};
+				
     }
     /**
      * Prototype inheritance of voview object methods.
      */
-    Filter.prototype = this;
+    Filter.prototype = this;		
     return new Filter(filterParams.votableDOM, filterParams.filterCallback);
 };
 /**
@@ -953,6 +975,7 @@ voview.prototype.makeRenderer = function(rendererParams) {
          * @param {XML Dom object} _filteredDOM The filtered VOTABLE.
          */
         function renderTable(_filteredDOM) {
+					
             filteredDOM = _filteredDOM;
             meRenderer.setTitle(titleText);
 						
